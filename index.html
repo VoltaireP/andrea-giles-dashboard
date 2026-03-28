@@ -687,7 +687,7 @@
 const DASHBOARD_DATA = {
   client: "Andrea Giles Coaching",
   accountId: "act_1062711985037270",
-  lastUpdated: "2026-03-24",
+  lastUpdated: "2026-03-27",
   weeks: [
     {
       label: "Feb 6 - 12",
@@ -816,6 +816,26 @@ const DASHBOARD_DATA = {
         { rank: 7, name: "[0:16] You Deserve To Feel Better- Claire Byrne", campaign: "Video Views", spend: 6.91, results: 764, costPer: 0.009, resultType: "views" },
         { rank: 8, name: "[0:46] Empowerment & Growth- Claire Byrne", campaign: "Video Views", spend: 6.80, results: 750, costPer: 0.0091, resultType: "views" }
       ]
+    },
+    {
+      label: "Mar 20 - 26",
+      dateRange: { start: "2026-03-20", end: "2026-03-26" },
+      account: { spend: 259.20, impressions: 20308, clicks: 2392, reach: 12244, videoViews: 3582 },
+      campaigns: [
+        { name: "Podcast Bundle", type: "leadgen", spend: 189.59, leads: 357, cpl: 0.53, linkClicks: 455, ctr: 17.56, lpv: 417, costLpv: 0.45, reach: 7374, impressions: 12657, frequency: 1.72, lpConvRate: 85.6 },
+        { name: "Video Views (Cold)", type: "video", spend: 34.68, videoViews: 3582, costPerView: 0.0097, reach: 3081, impressions: 4259, frequency: 1.38 },
+        { name: "Podcast Ep 150", type: "traffic", spend: 34.93, linkClicks: 223, cpc: 0.16, lpv: 207, costLpv: 0.17, ctr: 4.45, reach: 1789, impressions: 3392, frequency: 1.90 }
+      ],
+      topAds: [
+        { rank: 1, name: "Ad 3- Transformation- Peace is Possible", campaign: "Podcast Bundle", spend: 186.11, results: 349, costPer: 0.53, resultType: "leads" },
+        { rank: 2, name: "Ad 5- Guilt is Not Hearing- Andrea's Voice", campaign: "Podcast Bundle", spend: 0.95, results: 6, costPer: 0.16, resultType: "leads" },
+        { rank: 3, name: "Variable A- Testimonial Social Proof (New)", campaign: "Podcast Bundle", spend: 2.53, results: 2, costPer: 1.27, resultType: "leads" },
+        { rank: 4, name: "[9:24] 3 Lies", campaign: "Video Views", spend: 6.89, results: 762, costPer: 0.009, resultType: "views" },
+        { rank: 5, name: "[0:29] Support & Community Healing", campaign: "Video Views", spend: 6.90, results: 738, costPer: 0.009, resultType: "views" },
+        { rank: 6, name: "[0:46] Empowerment & Growth- Claire Byrne", campaign: "Video Views", spend: 6.95, results: 716, costPer: 0.010, resultType: "views" },
+        { rank: 7, name: "[0:39] Life Changing Transformation", campaign: "Video Views", spend: 6.92, results: 715, costPer: 0.010, resultType: "views" },
+        { rank: 8, name: "[0:16] You Deserve To Feel Better- Claire Byrne", campaign: "Video Views", spend: 7.02, results: 651, costPer: 0.011, resultType: "views" }
+      ]
     }
   ]
 };
@@ -823,7 +843,7 @@ const DASHBOARD_DATA = {
 // ============================================================
 // DASHBOARD ENGINE
 // ============================================================
-let currentWeek = 7;
+let currentWeek = 8;
 let charts = {};
 
 function init() {
