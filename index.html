@@ -413,7 +413,7 @@
     <div class="header-right">
       <div class="last-updated">
         <span class="status-dot"></span>
-        <span id="lastUpdated">Last updated: March 27, 2026</span>
+        <span id="lastUpdated">Last updated: April 3, 2026</span>
       </div>
       <div class="logo-badge">Kaizen Sigma</div>
     </div>
@@ -428,7 +428,9 @@
     <button class="week-btn" data-week="4">Mar 6 - 12</button>
     <button class="week-btn" data-week="5">Mar 13 - 19</button>
     <button class="week-btn" data-week="6">Mar 15 - 21</button>
-    <button class="week-btn active" data-week="7">Mar 17 - 23</button>
+    <button class="week-btn" data-week="7">Mar 17 - 23</button>
+    <button class="week-btn" data-week="8">Mar 20 - 26</button>
+    <button class="week-btn active" data-week="9">Mar 27 - Apr 2</button>
   </div>
 
   <!-- Tab Navigation -->
@@ -512,27 +514,27 @@
         <div class="campaign-metrics">
           <div class="campaign-metric">
             <div class="label">Spend</div>
-            <div class="value">$191.05</div>
+            <div class="value">$196.68</div>
           </div>
           <div class="campaign-metric">
             <div class="label">Leads</div>
-            <div class="value">406</div>
+            <div class="value">456</div>
           </div>
           <div class="campaign-metric">
             <div class="label">CPL</div>
-            <div class="value">$0.47</div>
+            <div class="value">$0.43</div>
           </div>
           <div class="campaign-metric">
             <div class="label">Link Clicks</div>
-            <div class="value">504</div>
+            <div class="value">527</div>
           </div>
           <div class="campaign-metric">
             <div class="label">LP Conv Rate</div>
-            <div class="value">91.2%</div>
+            <div class="value">89.9%</div>
           </div>
           <div class="campaign-metric">
             <div class="label">CTR</div>
-            <div class="value">18.48%</div>
+            <div class="value">19.14%</div>
           </div>
         </div>
         <div class="campaign-chart">
@@ -552,27 +554,27 @@
         <div class="campaign-metrics">
           <div class="campaign-metric">
             <div class="label">Spend</div>
-            <div class="value">$34.37</div>
+            <div class="value">$35.20</div>
           </div>
           <div class="campaign-metric">
             <div class="label">Video Views</div>
-            <div class="value">3,999</div>
+            <div class="value">3,213</div>
           </div>
           <div class="campaign-metric">
             <div class="label">Cost/View</div>
-            <div class="value">$0.009</div>
+            <div class="value">$0.011</div>
           </div>
           <div class="campaign-metric">
             <div class="label">Reach</div>
-            <div class="value">3,725</div>
+            <div class="value">2,636</div>
           </div>
           <div class="campaign-metric">
             <div class="label">Impressions</div>
-            <div class="value">4,822</div>
+            <div class="value">3,954</div>
           </div>
           <div class="campaign-metric">
             <div class="label">Frequency</div>
-            <div class="value">1.29</div>
+            <div class="value">1.50</div>
           </div>
         </div>
         <div class="campaign-chart">
@@ -592,19 +594,19 @@
         <div class="campaign-metrics">
           <div class="campaign-metric">
             <div class="label">Spend</div>
-            <div class="value">$35.17</div>
+            <div class="value">$35.26</div>
           </div>
           <div class="campaign-metric">
             <div class="label">Link Clicks</div>
-            <div class="value">208</div>
+            <div class="value">201</div>
           </div>
           <div class="campaign-metric">
             <div class="label">CPC</div>
-            <div class="value">$0.17</div>
+            <div class="value">$0.18</div>
           </div>
           <div class="campaign-metric">
             <div class="label">LPV</div>
-            <div class="value">190</div>
+            <div class="value">181</div>
           </div>
           <div class="campaign-metric">
             <div class="label">Cost/LPV</div>
@@ -612,7 +614,7 @@
           </div>
           <div class="campaign-metric">
             <div class="label">Impressions</div>
-            <div class="value">3,619</div>
+            <div class="value">3,637</div>
           </div>
         </div>
         <div class="campaign-chart">
@@ -836,6 +838,26 @@ const DASHBOARD_DATA = {
         { rank: 7, name: "[0:39] Life Changing Transformation", campaign: "Video Views", spend: 6.92, results: 715, costPer: 0.010, resultType: "views" },
         { rank: 8, name: "[0:16] You Deserve To Feel Better- Claire Byrne", campaign: "Video Views", spend: 7.02, results: 651, costPer: 0.011, resultType: "views" }
       ]
+    },
+    {
+      label: "Mar 27 - Apr 2",
+      dateRange: { start: "2026-03-27", end: "2026-04-02" },
+      account: { spend: 267.14, impressions: 19860, clicks: 2504, reach: 11640, videoViews: 3213 },
+      campaigns: [
+        { name: "Podcast Bundle", type: "leadgen", spend: 196.68, leads: 456, cpl: 0.43, linkClicks: 527, ctr: 19.14, lpv: 474, costLpv: 0.42, reach: 6949, impressions: 12269, frequency: 1.77, lpConvRate: 89.9 },
+        { name: "Video Views (Cold)", type: "video", spend: 35.20, videoViews: 3213, costPerView: 0.0110, reach: 2636, impressions: 3954, frequency: 1.50 },
+        { name: "Podcast Ep 150", type: "traffic", spend: 35.26, linkClicks: 201, cpc: 0.18, lpv: 181, costLpv: 0.19, ctr: 4.07, reach: 2055, impressions: 3637, frequency: 1.77 }
+      ],
+      topAds: [
+        { rank: 1, name: "Ad 3- Transformation- Peace is Possible", campaign: "Podcast Bundle", spend: 165.88, results: 382, costPer: 0.43, resultType: "leads" },
+        { rank: 2, name: "Ad 5- Guilt is Not Hearing- Andrea's Voice", campaign: "Podcast Bundle", spend: 26.98, results: 68, costPer: 0.40, resultType: "leads" },
+        { rank: 3, name: "Variable A- Testimonial Social Proof", campaign: "Podcast Bundle", spend: 3.82, results: 6, costPer: 0.64, resultType: "leads" },
+        { rank: 4, name: "[0:39] Life Changing Transformation", campaign: "Video Views", spend: 6.93, results: 657, costPer: 0.0106, resultType: "views" },
+        { rank: 5, name: "[0:46] Empowerment & Growth- Claire Byrne", campaign: "Video Views", spend: 7.10, results: 669, costPer: 0.0106, resultType: "views" },
+        { rank: 6, name: "[9:24] 3 Lies", campaign: "Video Views", spend: 7.23, results: 665, costPer: 0.0109, resultType: "views" },
+        { rank: 7, name: "[0:29] Support & Community Healing", campaign: "Video Views", spend: 7.00, results: 615, costPer: 0.0114, resultType: "views" },
+        { rank: 8, name: "[0:16] You Deserve To Feel Better- Claire Byrne", campaign: "Video Views", spend: 6.94, results: 607, costPer: 0.0114, resultType: "views" }
+      ]
     }
   ]
 };
@@ -843,7 +865,7 @@ const DASHBOARD_DATA = {
 // ============================================================
 // DASHBOARD ENGINE
 // ============================================================
-let currentWeek = 8;
+let currentWeek = 9;
 let charts = {};
 
 function init() {
