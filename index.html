@@ -420,18 +420,8 @@
   </div>
 
   <!-- Week Selector -->
-  <div class="week-selector">
-    <button class="week-btn" data-week="0">Feb 6 - 12</button>
-    <button class="week-btn" data-week="1">Feb 13 - 19</button>
-    <button class="week-btn" data-week="2">Feb 20 - 26</button>
-    <button class="week-btn" data-week="3">Feb 27 - Mar 5</button>
-    <button class="week-btn" data-week="4">Mar 6 - 12</button>
-    <button class="week-btn" data-week="5">Mar 13 - 19</button>
-    <button class="week-btn" data-week="6">Mar 15 - 21</button>
-    <button class="week-btn" data-week="7">Mar 17 - 23</button>
-    <button class="week-btn" data-week="8">Mar 20 - 26</button>
-    <button class="week-btn" data-week="9">Mar 27 - Apr 2</button>
-    <button class="week-btn active" data-week="10">Apr 3 - 9</button>
+  <div class="week-selector" id="weekSelector">
+    <!-- Buttons auto-generated from DASHBOARD_DATA in init() -->
   </div>
 
   <!-- Tab Navigation -->
@@ -929,13 +919,20 @@ function setupTabs() {
 }
 
 function setupWeekSelector() {
-  document.querySelectorAll('.week-btn').forEach(btn => {
+  const container = document.getElementById('weekSelector');
+  container.innerHTML = '';
+  DASHBOARD_DATA.weeks.forEach((week, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'week-btn' + (idx === currentWeek ? ' active' : '');
+    btn.dataset.week = idx;
+    btn.textContent = week.label;
     btn.addEventListener('click', () => {
-      document.querySelectorAll('.week-btn').forEach(b => b.classList.remove('active'));
+      container.querySelectorAll('.week-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      currentWeek = parseInt(btn.dataset.week);
+      currentWeek = idx;
       renderDashboard();
     });
+    container.appendChild(btn);
   });
 }
 
