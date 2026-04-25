@@ -413,7 +413,7 @@
     <div class="header-right">
       <div class="last-updated">
         <span class="status-dot"></span>
-        <span id="lastUpdated">Last updated: April 17, 2026</span>
+        <span id="lastUpdated">Last updated: April 25, 2026</span>
       </div>
       <div class="logo-badge">Kaizen Sigma</div>
     </div>
@@ -443,14 +443,16 @@
         <div class="kpi-change positive" id="kpi-spend-change">+0.4% vs last week</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-label">Total Leads</div>
-        <div class="kpi-value" id="kpi-leads">406</div>
-        <div class="kpi-change negative" id="kpi-leads-change">-1.5% vs last week</div>
+        <div class="kpi-label">Kajabi Opt-Ins (Real)</div>
+        <div class="kpi-value" id="kpi-kajabi-optins">145</div>
+        <div class="kpi-change" id="kpi-kajabi-optins-change"></div>
+        <div style="font-size:10px; color:var(--text-muted); margin-top:4px;">FB pixel: <span id="kpi-pixel-leads">364</span> (over-counts ~2x)</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-label">Cost Per Lead</div>
-        <div class="kpi-value" id="kpi-cpl">$0.47</div>
-        <div class="kpi-change negative" id="kpi-cpl-change">+2.2% vs last week</div>
+        <div class="kpi-label">Real CPL (Kajabi)</div>
+        <div class="kpi-value" id="kpi-real-cpl">$1.31</div>
+        <div class="kpi-change" id="kpi-real-cpl-change"></div>
+        <div style="font-size:10px; color:var(--text-muted); margin-top:4px;">FB-reported: <span id="kpi-pixel-cpl">$0.52</span></div>
       </div>
       <div class="kpi-card">
         <div class="kpi-label">Impressions</div>
@@ -473,7 +475,7 @@
     <div class="kajabi-banner">
       <div class="icon">&#x1f4ca;</div>
       <div class="text">
-        <strong>Kajabi Integration Available</strong> &mdash; Purchase revenue and ROAS data can be pulled automatically via Kajabi API. Contact your Kaizen Sigma team to enable.
+        <strong>Kajabi Reconciled</strong> &mdash; Lead numbers and CPL on this dashboard now use actual Kajabi opt-in counts, not Meta pixel events. The Meta pixel over-reports leads by roughly 2x because it fires multiple events per opt-in. Real CPL and Real Opt-Ins are the trustworthy metrics for budgeting decisions.
       </div>
     </div>
 
@@ -505,15 +507,15 @@
         <div class="campaign-metrics">
           <div class="campaign-metric">
             <div class="label">Spend</div>
-            <div class="value">$199.44</div>
+            <div class="value" id="pb-spend">$189.73</div>
           </div>
           <div class="campaign-metric">
-            <div class="label">Leads</div>
-            <div class="value">574</div>
+            <div class="label">Kajabi Opt-Ins</div>
+            <div class="value" id="pb-kajabi">145</div>
           </div>
           <div class="campaign-metric">
-            <div class="label">CPL</div>
-            <div class="value">$0.35</div>
+            <div class="label">Real CPL</div>
+            <div class="value" id="pb-real-cpl">$1.31</div>
           </div>
           <div class="campaign-metric">
             <div class="label">Link Clicks</div>
@@ -680,14 +682,14 @@
 const DASHBOARD_DATA = {
   client: "Andrea Giles Coaching",
   accountId: "act_1062711985037270",
-  lastUpdated: "2026-04-17",
+  lastUpdated: "2026-04-25",
   weeks: [
     {
       label: "Feb 6 - 12",
       dateRange: { start: "2026-02-06", end: "2026-02-12" },
       account: { spend: 120.54, impressions: 9800, clicks: 980, reach: 5200, videoViews: 0 },
       campaigns: [
-        { name: "Podcast Bundle", type: "leadgen", spend: 120.54, leads: 97, cpl: 1.24, linkClicks: 180, ctr: 12.0, lpv: 150, costLpv: 0.80, reach: 3200, impressions: 6500, frequency: 2.03 },
+        { name: "Podcast Bundle", type: "leadgen", spend: 120.54, leads: 97, cpl: 1.24, kajabiOptins: 101, realCpl: 1.19, linkClicks: 180, ctr: 12.0, lpv: 150, costLpv: 0.80, reach: 3200, impressions: 6500, frequency: 2.03 },
         { name: "Video Views (Cold)", type: "video", spend: 0, videoViews: 0, costPerView: 0, reach: 0, impressions: 0, frequency: 0 },
         { name: "Podcast Ep 150", type: "traffic", spend: 0, linkClicks: 0, cpc: 0, lpv: 0, costLpv: 0, ctr: 0, reach: 0, impressions: 0, frequency: 0 }
       ],
@@ -700,7 +702,7 @@ const DASHBOARD_DATA = {
       dateRange: { start: "2026-02-13", end: "2026-02-19" },
       account: { spend: 305.24, impressions: 19200, clicks: 2100, reach: 10500, videoViews: 4100 },
       campaigns: [
-        { name: "Podcast Bundle", type: "leadgen", spend: 238.50, leads: 425, cpl: 0.72, linkClicks: 410, ctr: 19.80, lpv: 340, costLpv: 0.70, reach: 4800, impressions: 9500, frequency: 1.98 },
+        { name: "Podcast Bundle", type: "leadgen", spend: 238.50, leads: 425, cpl: 0.72, kajabiOptins: 430, realCpl: 0.55, linkClicks: 410, ctr: 19.80, lpv: 340, costLpv: 0.70, reach: 4800, impressions: 9500, frequency: 1.98 },
         { name: "Video Views (Cold)", type: "video", spend: 32.15, videoViews: 4100, costPerView: 0.0078, reach: 4200, impressions: 5200, frequency: 1.24 },
         { name: "Podcast Ep 150", type: "traffic", spend: 34.59, linkClicks: 198, cpc: 0.17, lpv: 185, costLpv: 0.19, ctr: 3.10, reach: 1900, impressions: 4500, frequency: 2.37 }
       ],
@@ -715,7 +717,7 @@ const DASHBOARD_DATA = {
       dateRange: { start: "2026-02-20", end: "2026-02-26" },
       account: { spend: 321.84, impressions: 20100, clicks: 2280, reach: 11000, videoViews: 4280 },
       campaigns: [
-        { name: "Podcast Bundle", type: "leadgen", spend: 255.84, leads: 338, cpl: 0.95, linkClicks: 440, ctr: 20.50, lpv: 360, costLpv: 0.71, reach: 5000, impressions: 10200, frequency: 2.04 },
+        { name: "Podcast Bundle", type: "leadgen", spend: 255.84, leads: 338, cpl: 0.95, kajabiOptins: 357, realCpl: 0.72, linkClicks: 440, ctr: 20.50, lpv: 360, costLpv: 0.71, reach: 5000, impressions: 10200, frequency: 2.04 },
         { name: "Video Views (Cold)", type: "video", spend: 33.00, videoViews: 4280, costPerView: 0.0077, reach: 4400, impressions: 5500, frequency: 1.25 },
         { name: "Podcast Ep 150", type: "traffic", spend: 33.00, linkClicks: 215, cpc: 0.15, lpv: 202, costLpv: 0.16, ctr: 3.25, reach: 2050, impressions: 4400, frequency: 2.15 }
       ],
@@ -730,7 +732,7 @@ const DASHBOARD_DATA = {
       dateRange: { start: "2026-02-27", end: "2026-03-05" },
       account: { spend: 288.08, impressions: 19500, clicks: 2200, reach: 10800, videoViews: 4150 },
       campaigns: [
-        { name: "Podcast Bundle", type: "leadgen", spend: 222.08, leads: 255, cpl: 1.13, linkClicks: 420, ctr: 19.50, lpv: 340, costLpv: 0.65, reach: 4900, impressions: 10000, frequency: 2.04 },
+        { name: "Podcast Bundle", type: "leadgen", spend: 222.08, leads: 255, cpl: 1.13, kajabiOptins: 267, realCpl: 0.83, linkClicks: 420, ctr: 19.50, lpv: 340, costLpv: 0.65, reach: 4900, impressions: 10000, frequency: 2.04 },
         { name: "Video Views (Cold)", type: "video", spend: 33.00, videoViews: 4150, costPerView: 0.008, reach: 4300, impressions: 5400, frequency: 1.26 },
         { name: "Podcast Ep 150", type: "traffic", spend: 33.00, linkClicks: 210, cpc: 0.16, lpv: 195, costLpv: 0.17, ctr: 3.15, reach: 2000, impressions: 4100, frequency: 2.05 }
       ],
@@ -745,7 +747,7 @@ const DASHBOARD_DATA = {
       dateRange: { start: "2026-03-06", end: "2026-03-12" },
       account: { spend: 187.92, impressions: 18500, clicks: 2050, reach: 9800, videoViews: 4500 },
       campaigns: [
-        { name: "Podcast Bundle", type: "leadgen", spend: 120.92, leads: 153, cpl: 1.23, linkClicks: 350, ctr: 18.50, lpv: 280, costLpv: 0.43, reach: 4200, impressions: 9000, frequency: 2.14 },
+        { name: "Podcast Bundle", type: "leadgen", spend: 120.92, leads: 153, cpl: 1.23, kajabiOptins: 166, realCpl: 0.73, linkClicks: 350, ctr: 18.50, lpv: 280, costLpv: 0.43, reach: 4200, impressions: 9000, frequency: 2.14 },
         { name: "Video Views (Cold)", type: "video", spend: 33.00, videoViews: 4500, costPerView: 0.0073, reach: 4400, impressions: 5500, frequency: 1.25 },
         { name: "Podcast Ep 150", type: "traffic", spend: 34.00, linkClicks: 220, cpc: 0.15, lpv: 205, costLpv: 0.17, ctr: 3.30, reach: 2100, impressions: 4000, frequency: 1.90 }
       ],
@@ -760,7 +762,7 @@ const DASHBOARD_DATA = {
       dateRange: { start: "2026-03-13", end: "2026-03-19" },
       account: { spend: 260.09, impressions: 21747, clicks: 2500, reach: 11500, videoViews: 5008 },
       campaigns: [
-        { name: "Podcast Bundle", type: "leadgen", spend: 190.69, leads: 346, cpl: 0.55, linkClicks: 500, ctr: 20.10, lpv: 420, costLpv: 0.45, reach: 5200, impressions: 11500, frequency: 2.21 },
+        { name: "Podcast Bundle", type: "leadgen", spend: 190.69, leads: 346, cpl: 0.55, kajabiOptins: 189, realCpl: 1.01, linkClicks: 500, ctr: 20.10, lpv: 420, costLpv: 0.45, reach: 5200, impressions: 11500, frequency: 2.21 },
         { name: "Video Views (Cold)", type: "video", spend: 34.40, videoViews: 5008, costPerView: 0.0069, reach: 4500, impressions: 5800, frequency: 1.29 },
         { name: "Podcast Ep 150", type: "traffic", spend: 35.00, linkClicks: 230, cpc: 0.15, lpv: 210, costLpv: 0.17, ctr: 3.35, reach: 2200, impressions: 4447, frequency: 2.02 }
       ],
@@ -775,7 +777,7 @@ const DASHBOARD_DATA = {
       dateRange: { start: "2026-03-15", end: "2026-03-21" },
       account: { spend: 259.46, impressions: 21765, clicks: 2609, reach: 11596, videoViews: 4317 },
       campaigns: [
-        { name: "Podcast Bundle", type: "leadgen", spend: 189.74, leads: 412, cpl: 0.46, linkClicks: 536, ctr: 19.24, lpv: 473, costLpv: 0.40, reach: 7406, impressions: 12705, frequency: 1.72, lpConvRate: 87.1 },
+        { name: "Podcast Bundle", type: "leadgen", spend: 189.74, leads: 412, cpl: 0.46, kajabiOptins: 177, realCpl: 1.07, linkClicks: 536, ctr: 19.24, lpv: 473, costLpv: 0.40, reach: 7406, impressions: 12705, frequency: 1.72, lpConvRate: 87.1 },
         { name: "Video Views (Cold)", type: "video", spend: 34.78, videoViews: 4317, costPerView: 0.008, reach: 4190, impressions: 5264, frequency: 1.26 },
         { name: "Podcast Ep 150", type: "traffic", spend: 34.94, linkClicks: 215, cpc: 0.16, lpv: 193, costLpv: 0.18, ctr: 5.66, reach: 2000, impressions: 3796, frequency: 1.90 }
       ],
@@ -795,7 +797,7 @@ const DASHBOARD_DATA = {
       dateRange: { start: "2026-03-17", end: "2026-03-23" },
       account: { spend: 260.59, impressions: 20931, clicks: 2469, reach: 12977, videoViews: 3999 },
       campaigns: [
-        { name: "Podcast Bundle", type: "leadgen", spend: 191.05, leads: 406, cpl: 0.47, linkClicks: 504, ctr: 18.48, lpv: 445, costLpv: 0.43, reach: 7268, impressions: 12490, frequency: 1.72, lpConvRate: 91.2 },
+        { name: "Podcast Bundle", type: "leadgen", spend: 191.05, leads: 406, cpl: 0.47, kajabiOptins: 178, realCpl: 1.07, linkClicks: 504, ctr: 18.48, lpv: 445, costLpv: 0.43, reach: 7268, impressions: 12490, frequency: 1.72, lpConvRate: 91.2 },
         { name: "Video Views (Cold)", type: "video", spend: 34.37, videoViews: 3999, costPerView: 0.0086, reach: 3725, impressions: 4822, frequency: 1.29 },
         { name: "Podcast Ep 150", type: "traffic", spend: 35.17, linkClicks: 208, cpc: 0.17, lpv: 190, costLpv: 0.19, ctr: 4.01, reach: 1984, impressions: 3619, frequency: 1.82 }
       ],
@@ -815,7 +817,7 @@ const DASHBOARD_DATA = {
       dateRange: { start: "2026-03-20", end: "2026-03-26" },
       account: { spend: 259.20, impressions: 20308, clicks: 2392, reach: 12244, videoViews: 3582 },
       campaigns: [
-        { name: "Podcast Bundle", type: "leadgen", spend: 189.59, leads: 357, cpl: 0.53, linkClicks: 455, ctr: 17.56, lpv: 417, costLpv: 0.45, reach: 7374, impressions: 12657, frequency: 1.72, lpConvRate: 85.6 },
+        { name: "Podcast Bundle", type: "leadgen", spend: 189.59, leads: 357, cpl: 0.53, kajabiOptins: 154, realCpl: 1.23, linkClicks: 455, ctr: 17.56, lpv: 417, costLpv: 0.45, reach: 7374, impressions: 12657, frequency: 1.72, lpConvRate: 85.6 },
         { name: "Video Views (Cold)", type: "video", spend: 34.68, videoViews: 3582, costPerView: 0.0097, reach: 3081, impressions: 4259, frequency: 1.38 },
         { name: "Podcast Ep 150", type: "traffic", spend: 34.93, linkClicks: 223, cpc: 0.16, lpv: 207, costLpv: 0.17, ctr: 4.45, reach: 1789, impressions: 3392, frequency: 1.90 }
       ],
@@ -835,7 +837,7 @@ const DASHBOARD_DATA = {
       dateRange: { start: "2026-03-27", end: "2026-04-02" },
       account: { spend: 267.14, impressions: 19860, clicks: 2504, reach: 11640, videoViews: 3213 },
       campaigns: [
-        { name: "Podcast Bundle", type: "leadgen", spend: 196.68, leads: 456, cpl: 0.43, linkClicks: 527, ctr: 19.14, lpv: 474, costLpv: 0.42, reach: 6949, impressions: 12269, frequency: 1.77, lpConvRate: 89.9 },
+        { name: "Podcast Bundle", type: "leadgen", spend: 196.68, leads: 456, cpl: 0.43, kajabiOptins: 193, realCpl: 1.02, linkClicks: 527, ctr: 19.14, lpv: 474, costLpv: 0.42, reach: 6949, impressions: 12269, frequency: 1.77, lpConvRate: 89.9 },
         { name: "Video Views (Cold)", type: "video", spend: 35.20, videoViews: 3213, costPerView: 0.0110, reach: 2636, impressions: 3954, frequency: 1.50 },
         { name: "Podcast Ep 150", type: "traffic", spend: 35.26, linkClicks: 201, cpc: 0.18, lpv: 181, costLpv: 0.19, ctr: 4.07, reach: 2055, impressions: 3637, frequency: 1.77 }
       ],
@@ -855,7 +857,7 @@ const DASHBOARD_DATA = {
       dateRange: { start: "2026-04-03", end: "2026-04-09" },
       account: { spend: 269.04, impressions: 21440, clicks: 2777, reach: 11810, videoViews: 3321 },
       campaigns: [
-        { name: "Podcast Bundle", type: "leadgen", spend: 199.44, leads: 574, cpl: 0.35, linkClicks: 544, ctr: 18.89, lpv: 484, costLpv: 0.41, reach: 7192, impressions: 13793, frequency: 1.92, lpConvRate: 89.0 },
+        { name: "Podcast Bundle", type: "leadgen", spend: 199.44, leads: 574, cpl: 0.35, kajabiOptins: 203, realCpl: 0.98, linkClicks: 544, ctr: 18.89, lpv: 484, costLpv: 0.41, reach: 7192, impressions: 13793, frequency: 1.92, lpConvRate: 89.0 },
         { name: "Video Views (Cold)", type: "video", spend: 34.88, videoViews: 3321, costPerView: 0.0105, reach: 2365, impressions: 3852, frequency: 1.63 },
         { name: "Podcast Ep 150", type: "traffic", spend: 34.72, linkClicks: 215, cpc: 0.22, lpv: 194, costLpv: 0.18, ctr: 4.19, reach: 2253, impressions: 3795, frequency: 1.68 }
       ],
@@ -875,7 +877,7 @@ const DASHBOARD_DATA = {
       dateRange: { start: "2026-04-10", end: "2026-04-16" },
       account: { spend: 258.59, impressions: 20432, clicks: 2126, reach: 10816, videoViews: 3066 },
       campaigns: [
-        { name: "Podcast Bundle", type: "leadgen", spend: 189.73, leads: 364, cpl: 0.52, linkClicks: 447, ctr: 14.74, lpv: 409, costLpv: 0.46, reach: 7049, impressions: 13362, frequency: 1.90, lpConvRate: 89.0 },
+        { name: "Podcast Bundle", type: "leadgen", spend: 189.73, leads: 364, cpl: 0.52, kajabiOptins: 145, realCpl: 1.31, linkClicks: 447, ctr: 14.74, lpv: 409, costLpv: 0.46, reach: 7049, impressions: 13362, frequency: 1.90, lpConvRate: 89.0 },
         { name: "Video Views (Cold)", type: "video", spend: 34.88, videoViews: 3066, costPerView: 0.0114, reach: 1646, impressions: 3276, frequency: 1.99 },
         { name: "Podcast Ep 150", type: "traffic", spend: 33.98, linkClicks: 222, cpc: 0.15, lpv: 189, costLpv: 0.18, ctr: 3.98, reach: 2121, impressions: 3794, frequency: 1.79 }
       ],
@@ -961,6 +963,16 @@ function renderDashboard() {
   renderInsights(week, prevWeek);
   renderRawData(week);
   renderCharts(week, prevWeek);
+  renderPodcastBundleCard(week);
+}
+
+function renderPodcastBundleCard(week) {
+  const pb = week.campaigns.find(c => c.type === 'leadgen');
+  if (!pb) return;
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  set('pb-spend', fmtMoney(pb.spend));
+  set('pb-kajabi', fmtNum(pb.kajabiOptins ?? 0));
+  set('pb-real-cpl', fmtMoney(pb.realCpl ?? 0));
 }
 
 function renderKPIs(week, prev) {
@@ -972,11 +984,17 @@ function renderKPIs(week, prev) {
   const pvv = prev ? prev.campaigns.find(c => c.type === 'video') : null;
 
   setKPI('kpi-spend', fmtMoney(a.spend), pctChange(a.spend, pa?.spend), true);
-  setKPI('kpi-leads', fmtNum(pb.leads), pctChange(pb.leads, ppb?.leads));
-  setKPI('kpi-cpl', fmtMoney(pb.cpl), pctChange(pb.cpl, ppb?.cpl), true);
+  setKPI('kpi-kajabi-optins', fmtNum(pb.kajabiOptins ?? 0), pctChange(pb.kajabiOptins, ppb?.kajabiOptins));
+  setKPI('kpi-real-cpl', fmtMoney(pb.realCpl ?? 0), pctChange(pb.realCpl, ppb?.realCpl), true);
   setKPI('kpi-impressions', fmtNum(a.impressions), pctChange(a.impressions, pa?.impressions));
   setKPI('kpi-clicks', fmtNum(a.clicks), pctChange(a.clicks, pa?.clicks));
   setKPI('kpi-videoviews', fmtNum(a.videoViews), pctChange(a.videoViews, pa?.videoViews));
+
+  // Show pixel-reported numbers as a secondary signal in the small print under each card
+  var pixelLeadsEl = document.getElementById('kpi-pixel-leads');
+  if (pixelLeadsEl) pixelLeadsEl.textContent = fmtNum(pb.leads);
+  var pixelCplEl = document.getElementById('kpi-pixel-cpl');
+  if (pixelCplEl) pixelCplEl.textContent = fmtMoney(pb.cpl);
 }
 
 function setKPI(id, value, change, invertColor) {
@@ -1014,34 +1032,75 @@ function renderInsights(week, prev) {
   const ppb = prev ? prev.campaigns.find(c => c.type === 'leadgen') : null;
   const vv = week.campaigns.find(c => c.type === 'video');
 
-  if (ppb && pb.cpl < ppb.cpl) {
-    const drop = ((ppb.cpl - pb.cpl) / ppb.cpl * 100).toFixed(0);
-    insights.push({ type: 'positive', title: 'Cost Per Lead Improving', text: `Podcast Bundle CPL dropped ${drop}% this week to $${pb.cpl.toFixed(2)}, down from $${ppb.cpl.toFixed(2)} last week. The algorithm is finding more efficient placements as the campaign matures.` });
+  // The headline insight: Real CPL based on Kajabi opt-ins
+  if (pb.kajabiOptins != null && pb.realCpl != null) {
+    const directionText = ppb && ppb.realCpl != null
+      ? (pb.realCpl < ppb.realCpl
+          ? `down from $${ppb.realCpl.toFixed(2)} last week`
+          : `up from $${ppb.realCpl.toFixed(2)} last week`)
+      : '';
+    insights.push({
+      type: pb.realCpl < 1.10 ? 'positive' : 'warning',
+      title: `Real CPL: $${pb.realCpl.toFixed(2)} (${pb.kajabiOptins} Kajabi opt-ins)`,
+      text: `Based on actual Kajabi opt-ins, you spent $${pb.spend.toFixed(2)} to acquire ${pb.kajabiOptins} new email subscribers ${directionText}. This is the trustworthy number. Meta's pixel reported ${pb.leads} leads at $${pb.cpl.toFixed(2)} CPL, but the pixel fires multiple events per opt-in, inflating the count by roughly 2x.`
+    });
   }
 
+  // Week-over-week opt-in volume
+  if (ppb && pb.kajabiOptins != null && ppb.kajabiOptins != null && ppb.kajabiOptins > 0) {
+    const change = ((pb.kajabiOptins - ppb.kajabiOptins) / ppb.kajabiOptins * 100);
+    if (Math.abs(change) >= 10) {
+      insights.push({
+        type: change > 0 ? 'positive' : 'warning',
+        title: `Opt-In Volume ${change > 0 ? 'Up' : 'Down'} ${Math.abs(change).toFixed(0)}% Week-over-Week`,
+        text: `${pb.kajabiOptins} opt-ins this week vs ${ppb.kajabiOptins} last week. ${change > 0 ? "Spend efficiency on the Podcast Bundle is climbing." : "The drop is worth a closer look at creative fatigue and audience saturation. Refreshing the top-performing ad's variations or rotating new hooks may be needed."}`
+      });
+    }
+  }
+
+  // Landing page conversion remains a real signal (LPV is page view, not pixel lead)
   if (pb.lpConvRate && pb.lpConvRate > 80) {
-    insights.push({ type: 'positive', title: 'Landing Page Converting at ' + pb.lpConvRate + '%', text: `${pb.lpConvRate}% of landing page viewers are converting to leads (${pb.leads} leads from ${pb.lpv} LPVs). This is an exceptionally high conversion rate indicating strong offer-audience alignment.` });
+    const realLpConv = pb.kajabiOptins && pb.lpv ? (pb.kajabiOptins / pb.lpv * 100).toFixed(1) : null;
+    const realText = realLpConv
+      ? ` Recalculated against Kajabi: ${realLpConv}% of landing page viewers actually opted in (${pb.kajabiOptins} of ${pb.lpv}).`
+      : '';
+    insights.push({
+      type: 'info',
+      title: `Landing Page Quality (Pixel-Reported): ${pb.lpConvRate}%`,
+      text: `The pixel-reported LP conversion rate is ${pb.lpConvRate}% — but this includes inflated lead counts.${realText} The landing page itself is converting well; the gap between pixel and Kajabi is a tracking issue, not a page-quality issue.`
+    });
   }
 
   if (pb.ctr > 15) {
-    insights.push({ type: 'positive', title: 'Strong CTR on Podcast Bundle', text: `CTR of ${pb.ctr.toFixed(1)}% is well above the 2-3% industry average for lead gen campaigns. The creative-audience match is strong, particularly on the Transformation - Peace is Possible angle.` });
+    insights.push({
+      type: 'positive',
+      title: `Strong CTR: ${pb.ctr.toFixed(1)}%`,
+      text: `Click-through rate is well above the 2-3% industry average for lead gen. The creative-audience match is strong on the Transformation - Peace is Possible angle. Click volume (${fmtNum(pb.linkClicks)}) is real signal — that's a Meta count, not a pixel count.`
+    });
   }
 
   if (vv && vv.videoViews > 0) {
-    insights.push({ type: 'info', title: 'Video Views Building Awareness', text: `The cold video campaign delivered ${fmtNum(vv.videoViews)} video views at just $${vv.costPerView.toFixed(3)} each. This top-of-funnel awareness feeds warm audiences for the Podcast Bundle retargeting. Reach of ${fmtNum(vv.reach)} new people this week.` });
-  }
-
-  if (ppb && pb.leads > ppb.leads) {
-    const leadIncrease = ((pb.leads - ppb.leads) / ppb.leads * 100).toFixed(0);
-    insights.push({ type: 'positive', title: 'Lead Volume Up ' + leadIncrease + '% Week-over-Week', text: `Generated ${pb.leads} leads this week vs ${ppb.leads} last week. Ad 3 (Transformation - Peace is Possible) captured 99.5% of spend and is the clear winner driving virtually all lead volume.` });
+    insights.push({
+      type: 'info',
+      title: 'Video Views Building Awareness',
+      text: `The cold video campaign delivered ${fmtNum(vv.videoViews)} video views at $${vv.costPerView.toFixed(3)} each. This top-of-funnel awareness seeds warm audiences for the Podcast Bundle retargeting. Reach of ${fmtNum(vv.reach)} new people this week.`
+    });
   }
 
   const topAd = week.topAds[0];
-  if (topAd.results && topAd.costPer) {
-    insights.push({ type: 'info', title: 'Top Performer: ' + topAd.name.substring(0, 40), text: `Driving ${fmtNum(topAd.results)} results at $${topAd.costPer.toFixed(2)} each. This ad captured 99.5% of campaign budget allocation through Meta's optimization, indicating the algorithm strongly favors this creative.` });
+  if (topAd && topAd.results && topAd.costPer) {
+    insights.push({
+      type: 'info',
+      title: `Top Ad: ${topAd.name.substring(0, 40)}`,
+      text: `${fmtNum(topAd.results)} pixel-reported results at $${topAd.costPer.toFixed(2)} each. Meta's algorithm strongly favors this creative for budget allocation. Note: pixel-reported counts at the ad level are still inflated by the same ~2x factor — actual Kajabi opt-in attribution per ad is not available, but campaign-level totals reconcile correctly.`
+    });
   }
 
-  insights.push({ type: 'warning', title: 'Kajabi Revenue Data Needed', text: 'ROAS calculations require Kajabi purchase data. Once the Kajabi API is connected, this dashboard will show real revenue, purchase counts, and true ROAS alongside your ad spend automatically.' });
+  insights.push({
+    type: 'warning',
+    title: 'Pixel Tracking Needs a Cleanup',
+    text: 'The Meta pixel is firing multiple Lead events per single opt-in (likely a combination of standard Lead + form-submission custom events + thank-you page Lead). Recommended next step: audit pixel events in Meta Events Manager and reduce to one firing trigger per opt-in. Even better: connect Kajabi to Meta via the Conversions API so opt-ins are sent server-side from Kajabi directly, replacing the pixel as the optimization signal.'
+  });
 
   grid.innerHTML = insights.map(i => `
     <div class="insight-card ${i.type}">
@@ -1098,9 +1157,9 @@ function renderCharts() {
     const pb = w.campaigns.find(c => c.type === 'leadgen');
     return pb ? pb.spend : 0;
   });
-  const leads = DASHBOARD_DATA.weeks.map(w => {
+  const optins = DASHBOARD_DATA.weeks.map(w => {
     const pb = w.campaigns.find(c => c.type === 'leadgen');
-    return pb ? pb.leads : 0;
+    return pb ? (pb.kajabiOptins ?? 0) : 0;
   });
   const videoViews = DASHBOARD_DATA.weeks.map(w => {
     const vv = w.campaigns.find(c => c.type === 'video');
@@ -1126,7 +1185,7 @@ function renderCharts() {
         labels,
         datasets: [
           { label: 'Spend ($)', data: spends, backgroundColor: 'rgba(116,185,255,0.6)', borderColor: '#74b9ff', borderWidth: 1, yAxisID: 'y', borderRadius: 4 },
-          { label: 'Opt-ins', data: leads, type: 'line', borderColor: '#00b894', backgroundColor: 'rgba(0,184,148,0.1)', tension: 0.3, yAxisID: 'y1', pointRadius: 5, pointBackgroundColor: '#00b894' }
+          { label: 'Kajabi Opt-Ins (Real)', data: optins, type: 'line', borderColor: '#00b894', backgroundColor: 'rgba(0,184,148,0.1)', tension: 0.3, yAxisID: 'y1', pointRadius: 5, pointBackgroundColor: '#00b894' }
         ]
       },
       options: {
@@ -1134,7 +1193,7 @@ function renderCharts() {
         scales: {
           ...chartDefaults.scales,
           y: { ...chartDefaults.scales.y, position: 'left', title: { display: true, text: 'Spend ($)', color: '#74b9ff' } },
-          y1: { ...chartDefaults.scales.y, position: 'right', title: { display: true, text: 'Opt-ins', color: '#00b894' }, grid: { drawOnChartArea: false } }
+          y1: { ...chartDefaults.scales.y, position: 'right', title: { display: true, text: 'Kajabi Opt-Ins (Real)', color: '#00b894' }, grid: { drawOnChartArea: false } }
         }
       }
     });
