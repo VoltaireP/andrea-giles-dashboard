@@ -413,7 +413,7 @@
     <div class="header-right">
       <div class="last-updated">
         <span class="status-dot"></span>
-        <span id="lastUpdated">Last updated: April 25, 2026</span>
+        <span id="lastUpdated">Last updated: April 25, 2026 (week ending Apr 24)</span>
       </div>
       <div class="logo-badge">Kaizen Sigma</div>
     </div>
@@ -507,15 +507,15 @@
         <div class="campaign-metrics">
           <div class="campaign-metric">
             <div class="label">Spend</div>
-            <div class="value" id="pb-spend">$189.73</div>
+            <div class="value" id="pb-spend">$233.44</div>
           </div>
           <div class="campaign-metric">
             <div class="label">Kajabi Opt-Ins</div>
-            <div class="value" id="pb-kajabi">145</div>
+            <div class="value" id="pb-kajabi">219</div>
           </div>
           <div class="campaign-metric">
             <div class="label">Real CPL</div>
-            <div class="value" id="pb-real-cpl">$1.31</div>
+            <div class="value" id="pb-real-cpl">$1.07</div>
           </div>
           <div class="campaign-metric">
             <div class="label">Link Clicks</div>
@@ -682,7 +682,7 @@
 const DASHBOARD_DATA = {
   client: "Andrea Giles Coaching",
   accountId: "act_1062711985037270",
-  lastUpdated: "2026-04-25",
+  lastUpdated: "2026-04-25 (week ending Apr 24)",
   weeks: [
     {
       label: "Feb 6 - 12",
@@ -893,6 +893,28 @@ const DASHBOARD_DATA = {
         { rank: 9, name: "[0:29]- Support & Community Healing", campaign: "Video Views", spend: 6.93, results: 624, costPer: 0.011, resultType: "views" },
         { rank: 10, name: "[9:24]- 3 Lies", campaign: "Video Views", spend: 6.98, results: 509, costPer: 0.014, resultType: "views" }
       ]
+    },
+    {
+      label: "Apr 17 - 24",
+      dateRange: { start: "2026-04-17", end: "2026-04-24" },
+      account: { spend: 313.03, impressions: 24389, clicks: 2725, reach: 12779, videoViews: 3762 },
+      campaigns: [
+        { name: "Podcast Bundle", type: "leadgen", spend: 233.44, leads: 518, cpl: 0.45, kajabiOptins: 219, realCpl: 1.07, linkClicks: 600, ctr: 17.36, lpv: 550, costLpv: 0.42, reach: 7533, impressions: 14769, frequency: 1.96, lpConvRate: 39.8 },
+        { name: "Video Views (Cold)", type: "video", spend: 38.84, videoViews: 3762, costPerView: 0.0103, reach: 2812, impressions: 4198, frequency: 1.49 },
+        { name: "Podcast Ep 150", type: "traffic", spend: 40.75, linkClicks: 263, cpc: 0.15, lpv: 239, costLpv: 0.17, ctr: 2.90, reach: 2434, impressions: 5422, frequency: 2.23 }
+      ],
+      topAds: [
+        { rank: 1, name: "Variable A- Testimonial Social Proof", campaign: "Podcast Bundle", spend: 81.37, results: 122, costPer: 0.67, resultType: "leads" },
+        { rank: 2, name: "Ad 3- Transformation- Peace is Possible", campaign: "Podcast Bundle", spend: 64.38, results: 137, costPer: 0.47, resultType: "leads" },
+        { rank: 3, name: "Control Ad 1- Their Guilt (Iteration Winner)", campaign: "Podcast Bundle", spend: 61.75, results: 193, costPer: 0.32, resultType: "leads" },
+        { rank: 4, name: "Ad 5- Guilt is Not Hearing- Andrea's Voice", campaign: "Podcast Bundle", spend: 21.62, results: 63, costPer: 0.34, resultType: "leads" },
+        { rank: 5, name: "Control Ad 2- Peace After Infidelity", campaign: "Podcast Bundle", spend: 4.32, results: 3, costPer: 1.44, resultType: "leads" },
+        { rank: 6, name: "[0:29]- Support & Community Healing", campaign: "Video Views", spend: 7.85, results: 736, costPer: 0.0107, resultType: "views" },
+        { rank: 7, name: "[0:46]- Empowerment & Growth- Claire Byrne", campaign: "Video Views", spend: 7.80, results: 790, costPer: 0.0099, resultType: "views" },
+        { rank: 8, name: "[0:16]- You Deserve To Feel Better- Claire Byrne", campaign: "Video Views", spend: 7.80, results: 787, costPer: 0.0099, resultType: "views" },
+        { rank: 9, name: "[0:39]- Life Changing Transformation", campaign: "Video Views", spend: 7.76, results: 767, costPer: 0.0101, resultType: "views" },
+        { rank: 10, name: "[9:24]- 3 Lies", campaign: "Video Views", spend: 5.46, results: 359, costPer: 0.0152, resultType: "views" }
+      ]
     }
   ]
 };
@@ -900,7 +922,7 @@ const DASHBOARD_DATA = {
 // ============================================================
 // DASHBOARD ENGINE
 // ============================================================
-let currentWeek = 11;
+let currentWeek = 12;
 let charts = {};
 
 function init() {
