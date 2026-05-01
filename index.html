@@ -155,6 +155,67 @@
   .kpi-change.positive { color: var(--positive); }
   .kpi-change.negative { color: var(--negative); }
 
+  /* Since Launch hero */
+  .since-launch {
+    background: linear-gradient(135deg, rgba(116,185,255,0.10), rgba(162,155,254,0.10));
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 18px 22px;
+    margin-bottom: 24px;
+  }
+  .since-launch-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .since-launch-title {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    font-weight: 600;
+  }
+  .since-launch-window {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .since-launch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+  }
+  .since-launch-stat {
+    background: rgba(15, 52, 96, 0.35);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .since-launch-stat .label {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 6px;
+  }
+  .since-launch-stat .value {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .since-launch-stat .sub {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .since-launch-stat .pending {
+    color: var(--warning);
+    font-style: italic;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
   /* Sections */
   .section {
     margin-bottom: 32px;
@@ -416,6 +477,36 @@
         <span id="lastUpdated">Last updated: April 25, 2026 (week ending Apr 24)</span>
       </div>
       <div class="logo-badge">Kaizen Sigma</div>
+    </div>
+  </div>
+
+  <!-- Since Launch / Lifetime totals -->
+  <div class="since-launch" id="sinceLaunch">
+    <div class="since-launch-head">
+      <div class="since-launch-title">Since Launch</div>
+      <div class="since-launch-window" id="sinceLaunchWindow">&nbsp;</div>
+    </div>
+    <div class="since-launch-grid">
+      <div class="since-launch-stat">
+        <div class="label">Total Spend</div>
+        <div class="value" id="sl-spend">&mdash;</div>
+        <div class="sub" id="sl-spend-sub">&nbsp;</div>
+      </div>
+      <div class="since-launch-stat">
+        <div class="label">Total Kajabi Opt-Ins</div>
+        <div class="value" id="sl-optins">&mdash;</div>
+        <div class="sub" id="sl-optins-sub">&nbsp;</div>
+      </div>
+      <div class="since-launch-stat">
+        <div class="label">Total Revenue Generated</div>
+        <div class="value" id="sl-revenue">&mdash;</div>
+        <div class="sub" id="sl-revenue-sub">&nbsp;</div>
+      </div>
+      <div class="since-launch-stat">
+        <div class="label">Avg. Real CPL</div>
+        <div class="value" id="sl-cpl">&mdash;</div>
+        <div class="sub" id="sl-cpl-sub">Lifetime spend &divide; opt-ins</div>
+      </div>
     </div>
   </div>
 
@@ -774,6 +865,7 @@ const DASHBOARD_DATA = {
     },
     {
       label: "Mar 15 - 21",
+      cumulativeInclude: false,
       dateRange: { start: "2026-03-15", end: "2026-03-21" },
       account: { spend: 259.46, impressions: 21765, clicks: 2609, reach: 11596, videoViews: 4317 },
       campaigns: [
@@ -794,6 +886,7 @@ const DASHBOARD_DATA = {
     },
     {
       label: "Mar 17 - 23",
+      cumulativeInclude: false,
       dateRange: { start: "2026-03-17", end: "2026-03-23" },
       account: { spend: 260.59, impressions: 20931, clicks: 2469, reach: 12977, videoViews: 3999 },
       campaigns: [
@@ -980,12 +1073,70 @@ function renderDashboard() {
   const week = getWeek(currentWeek);
   const prevWeek = currentWeek > 0 ? getWeek(currentWeek - 1) : null;
 
+  renderSinceLaunch();
   renderKPIs(week, prevWeek);
   renderTopAds(week);
   renderInsights(week, prevWeek);
   renderRawData(week);
   renderCharts(week, prevWeek);
   renderPodcastBundleCard(week);
+}
+
+// Lifetime / Since Launch totals.
+// Sums account.spend and leadgen.kajabiOptins across every week flagged
+// for cumulative inclusion (cumulativeInclude !== false). Two mid-cycle
+// rolling-window snapshots (Mar 15-21, Mar 17-23) are excluded because
+// they overlap the canonical Friday-Thursday weeks and would double-count.
+// Revenue is summed from each week's `revenue` field. When no weeks have
+// revenue data populated, the tile shows "Pending" instead of $0.
+function renderSinceLaunch() {
+  const weeks = DASHBOARD_DATA.weeks.filter(w => w.cumulativeInclude !== false);
+  if (!weeks.length) return;
+
+  let totalSpend = 0;
+  let totalOptins = 0;
+  let totalRevenue = 0;
+  let revenueWeeks = 0;
+
+  weeks.forEach(w => {
+    if (w.account && typeof w.account.spend === 'number') totalSpend += w.account.spend;
+    const lg = (w.campaigns || []).find(c => c.type === 'leadgen');
+    if (lg && typeof lg.kajabiOptins === 'number') totalOptins += lg.kajabiOptins;
+    if (w.revenue != null && !isNaN(w.revenue)) {
+      totalRevenue += Number(w.revenue);
+      revenueWeeks += 1;
+    }
+  });
+
+  const first = weeks[0];
+  const last = weeks[weeks.length - 1];
+  const window = (first && last)
+    ? `${first.dateRange.start} → ${last.dateRange.end} • ${weeks.length} weeks`
+    : '';
+
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.innerHTML = v; };
+
+  set('sinceLaunchWindow', window);
+  set('sl-spend', fmtMoney(totalSpend));
+  set('sl-spend-sub', `Across ${weeks.length} reporting weeks`);
+
+  set('sl-optins', fmtNum(totalOptins));
+  set('sl-optins-sub', 'Kajabi-confirmed (Podcast Bundle)');
+
+  if (revenueWeeks === 0) {
+    set('sl-revenue', '<span class="pending">Pending</span>');
+    set('sl-revenue-sub', 'Awaiting Kajabi purchase data');
+  } else {
+    set('sl-revenue', fmtMoney(totalRevenue));
+    set('sl-revenue-sub', `${revenueWeeks} of ${weeks.length} weeks reported`);
+  }
+
+  if (totalOptins > 0) {
+    const cpl = totalSpend / totalOptins;
+    set('sl-cpl', fmtMoney(cpl));
+  } else {
+    set('sl-cpl', '—');
+  }
 }
 
 function renderPodcastBundleCard(week) {
