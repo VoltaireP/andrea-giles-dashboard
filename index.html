@@ -498,7 +498,7 @@
         <div class="sub" id="sl-optins-sub">&nbsp;</div>
       </div>
       <div class="since-launch-stat">
-        <div class="label">Total Revenue Generated</div>
+        <div class="label">Program Revenue (GYLB Offers)</div>
         <div class="value" id="sl-revenue">&mdash;</div>
         <div class="sub" id="sl-revenue-sub">&nbsp;</div>
       </div>
@@ -774,6 +774,15 @@ const DASHBOARD_DATA = {
   client: "Andrea Giles Coaching",
   accountId: "act_1062711985037270",
   lastUpdated: "2026-05-01 (week ending Apr 30)",
+  // Program Revenue methodology: sum of GYLB offer family from Kajabi sales report
+  // (Feb 6 - Apr 30 2026). Includes "NEW Get Your Life Back After Infidelity PIF 2026"
+  // ($13,485) + "GYLB 6 Months Access (PIF/3moPP/6moPP)" ($5,747) + "NEW GYLB PP $475
+  // 2026" ($475). Excludes Reclaim retreat sales, Alumni Monthly MRR, and small-ticket
+  // offers. Tile labels this as "program revenue" not "campaign revenue" because the
+  // GYLB offers attract buyers from podcast and email-list as well as paid ads — the
+  // measure is what the program the funnel sells produced, not click-attributed sales.
+  programRevenueLifetime: 19707,
+  programRevenueWindow: { start: "2026-02-06", end: "2026-04-30" },
   weeks: [
     {
       label: "Feb 6 - 12",
@@ -1018,6 +1027,7 @@ const DASHBOARD_DATA = {
         { name: "Video Views (Cold)", type: "video", spend: 35.84, videoViews: 3502, costPerView: 0.0102, reach: 2907, impressions: 4044, frequency: 1.39 },
         { name: "Podcast Ep 150", type: "traffic", spend: 35.59, linkClicks: 202, cpc: 0.18, lpv: 180, costLpv: 0.20, ctr: 2.86, reach: 2166, impressions: 3991, frequency: 1.84 }
       ],
+      revenue: 2972,
       topAds: [
         { rank: 1, name: "Control Ad 1- Their Guilt", campaign: "Podcast Bundle", spend: 100.82, results: 303, costPer: 0.33, resultType: "leads" },
         { rank: 2, name: "Variable A- Testimonial Social Proof", campaign: "Podcast Bundle", spend: 68.25, results: 117, costPer: 0.58, resultType: "leads" },
@@ -1145,7 +1155,13 @@ function renderSinceLaunch() {
   set('sl-optins', fmtNum(totalOptins));
   set('sl-optins-sub', 'Kajabi-confirmed (Podcast Bundle)');
 
-  if (revenueWeeks === 0) {
+  // Program Revenue tile: prefer lifetime override (sums GYLB offers across the
+  // campaign window from Kajabi's sales report) over per-week sums until per-week
+  // GYLB attribution is backfilled.
+  if (typeof DASHBOARD_DATA.programRevenueLifetime === 'number') {
+    set('sl-revenue', fmtMoney(DASHBOARD_DATA.programRevenueLifetime));
+    set('sl-revenue-sub', 'GYLB PIF + 6mo Access + PP $475 (Kajabi)');
+  } else if (revenueWeeks === 0) {
     set('sl-revenue', '<span class="pending">Pending</span>');
     set('sl-revenue-sub', 'Awaiting Kajabi purchase data');
   } else {
