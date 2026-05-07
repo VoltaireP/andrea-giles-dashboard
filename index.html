@@ -483,7 +483,7 @@
   <!-- Since Launch / Lifetime totals -->
   <div class="since-launch" id="sinceLaunch">
     <div class="since-launch-head">
-      <div class="since-launch-title">Since Launch</div>
+      <div class="since-launch-title">Since Launch &mdash; Top of Funnel</div>
       <div class="since-launch-window" id="sinceLaunchWindow">&nbsp;</div>
     </div>
     <div class="since-launch-grid">
@@ -498,14 +498,44 @@
         <div class="sub" id="sl-optins-sub">&nbsp;</div>
       </div>
       <div class="since-launch-stat">
-        <div class="label">Program Revenue (GYLB Offers)</div>
-        <div class="value" id="sl-revenue">&mdash;</div>
-        <div class="sub" id="sl-revenue-sub">&nbsp;</div>
-      </div>
-      <div class="since-launch-stat">
         <div class="label">Avg. Real CPL</div>
         <div class="value" id="sl-cpl">&mdash;</div>
         <div class="sub" id="sl-cpl-sub">Lifetime spend &divide; opt-ins</div>
+      </div>
+      <div class="since-launch-stat">
+        <div class="label">GYLB Applications</div>
+        <div class="value" id="sl-apps">&mdash;</div>
+        <div class="sub" id="sl-apps-sub">&nbsp;</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Revenue Attribution Scorecard -->
+  <div class="since-launch" id="attributionScorecard">
+    <div class="since-launch-head">
+      <div class="since-launch-title">Revenue Attribution Scorecard</div>
+      <div class="since-launch-window">Read as a scorecard, not one number. Floor &rarr; Bundle reach &rarr; Ceiling.</div>
+    </div>
+    <div class="since-launch-grid">
+      <div class="since-launch-stat">
+        <div class="label">Confirmed Campaign Revenue</div>
+        <div class="value" id="sl-tile1">&mdash;</div>
+        <div class="sub" id="sl-tile1-sub">Floor: net-new bundle buyers</div>
+      </div>
+      <div class="since-launch-stat">
+        <div class="label">Bundle List Buyers</div>
+        <div class="value" id="sl-tile2">&mdash;</div>
+        <div class="sub" id="sl-tile2-sub">+ alumni reactivated by bundle</div>
+      </div>
+      <div class="since-launch-stat">
+        <div class="label">Program Revenue</div>
+        <div class="value" id="sl-tile3">&mdash;</div>
+        <div class="sub" id="sl-tile3-sub">Ceiling: all GYLB sales during campaign weeks</div>
+      </div>
+      <div class="since-launch-stat">
+        <div class="label">Cost per Application</div>
+        <div class="value" id="sl-tile4">&mdash;</div>
+        <div class="sub" id="sl-tile4-sub">Mid-funnel: cleanest attribution</div>
       </div>
     </div>
   </div>
@@ -774,15 +804,66 @@ const DASHBOARD_DATA = {
   client: "Andrea Giles Coaching",
   accountId: "act_1062711985037270",
   lastUpdated: "2026-05-01 (week ending Apr 30)",
-  // Program Revenue methodology: sum of GYLB offer family from Kajabi sales report
-  // (Feb 6 - Apr 30 2026). Includes "NEW Get Your Life Back After Infidelity PIF 2026"
-  // ($13,485) + "GYLB 6 Months Access (PIF/3moPP/6moPP)" ($5,747) + "NEW GYLB PP $475
-  // 2026" ($475). Excludes Reclaim retreat sales, Alumni Monthly MRR, and small-ticket
-  // offers. Tile labels this as "program revenue" not "campaign revenue" because the
-  // GYLB offers attract buyers from podcast and email-list as well as paid ads — the
-  // measure is what the program the funnel sells produced, not click-attributed sales.
-  programRevenueLifetime: 19707,
+  // ============================================================
+  // Revenue Attribution Scorecard (resolved 2026-05-07)
+  // ============================================================
+  // Ana asked for Option A (single-source attribution) on the lifetime tile.
+  // Single Option A would deflate the picture: Kajabi's opt-in source field
+  // gets noisy fast, and at high-ticket / multi-touch journey scale a single
+  // attributed number under-counts the campaign's real influence. Resolved by
+  // wiring a four-tile scorecard with Option A as the floor plus context tiles.
+  //
+  // Tile 1: Confirmed Campaign Revenue ($13,188 / 6 buyers)
+  //   Sabrina Mukhtar ($2,497, added Mar 31, NEW PIF Apr 25)
+  //   Kim Simpson ($2,997, added Apr 5, NEW PIF Apr 23)
+  //   Savannah Whitehead ($2,497, added Apr 7, NEW PIF Apr 17)
+  //   Sarah Voelkel ($2,997, added Apr 8, NEW PIF Apr 17)
+  //   Melanie Cooper ($950, added Feb 15, PP $475 sub Mar 31)
+  //   Abigail E Snell ($1,250, added Feb 22, 6mo Access sub Mar 13)
+  //   Criterion: contact added on/after 2026-02-06 launch with no prior tag
+  //   history, then bought a GYLB program. Floor estimate.
+  //
+  // Tile 2: Bundle List Buyers ($15,685 / 7 buyers)
+  //   Tile 1 plus Liz Mitchell ($2,497, NEW PIF Apr 17). Liz is a long-time
+  //   GYLB alumni (100+ historical tags from 2024-2025 funnels). Her Apr 5
+  //   re-add aligns with the bundle launch window. Counted here because the
+  //   bundle re-engaged her, even though she is not a net-new acquisition.
+  //
+  // Tile 3: Program Revenue ($24,179) — ceiling
+  //   All GYLB-program sales Feb 6 - Apr 30, regardless of buyer history:
+  //     NEW PIF 2026         $13,485 (5 buyers)
+  //     6mo Access PIF/PP     $5,747 (Karen Sor + Abigail Snell)
+  //     NEW PP $475           $950   (Melanie Cooper, 2 sub payments)
+  //     Older PIF (Deborah)   $3,997 (Feb 16 charge, $4,997 list price)
+  //   Excludes Reclaim retreat, Alumni Monthly MRR, scholarship refunds,
+  //   small-ticket non-program offers (Decide $47, etc.).
+  //
+  // Tile 4: Cost per Application ($254 / app, 7 applications since 3/16)
+  //   Spend Mar 16 - Apr 30 = $1,782. 7 GYLB applications since 3/16 (per
+  //   Ana 2026-04-29). Cleanest mid-funnel attribution we have because
+  //   applications are an explicit step, not a delayed purchase.
+  //
+  // GYLB pre-launch buyers excluded from Tiles 1-3:
+  //   Karen Sor (added Jan 10 2024) — long-time contact, bought Feb 13 in
+  //     window but NOT a campaign acquisition; her $4,497 IS in Tile 3 ceiling
+  //     because she bought during the window
+  //   Deborah McDonnell (added Oct 26 2025) — pre-launch contact, bought
+  //     Feb 16; same logic, $3,997 is in Tile 3 ceiling
+  //   Diana Griffin (Jan 9 2026), Eliana Blankstone (Dec 18 2025), Emma Cook
+  //     (Nov 12 2025), Lisa Hingeley (Jan 6 refunded), joan oakey (Jan 6 sub)
+  //     all pre-launch — fully excluded
+  programRevenueLifetime: 24179,
   programRevenueWindow: { start: "2026-02-06", end: "2026-04-30" },
+  attribution: {
+    confirmedCampaignRevenue: 13188,
+    confirmedCampaignBuyers: 6,
+    bundleListBuyersRevenue: 15685,
+    bundleListBuyersCount: 7,
+    programRevenue: 24179,
+    applicationsSinceQuiz: 7,
+    applicationsSpend: 1782,
+    applicationsSpendStart: "2026-03-16"
+  },
   weeks: [
     {
       label: "Feb 6 - 12",
@@ -1155,25 +1236,50 @@ function renderSinceLaunch() {
   set('sl-optins', fmtNum(totalOptins));
   set('sl-optins-sub', 'Kajabi-confirmed (Podcast Bundle)');
 
-  // Program Revenue tile: prefer lifetime override (sums GYLB offers across the
-  // campaign window from Kajabi's sales report) over per-week sums until per-week
-  // GYLB attribution is backfilled.
-  if (typeof DASHBOARD_DATA.programRevenueLifetime === 'number') {
-    set('sl-revenue', fmtMoney(DASHBOARD_DATA.programRevenueLifetime));
-    set('sl-revenue-sub', 'GYLB PIF + 6mo Access + PP $475 (Kajabi)');
-  } else if (revenueWeeks === 0) {
-    set('sl-revenue', '<span class="pending">Pending</span>');
-    set('sl-revenue-sub', 'Awaiting Kajabi purchase data');
-  } else {
-    set('sl-revenue', fmtMoney(totalRevenue));
-    set('sl-revenue-sub', `${revenueWeeks} of ${weeks.length} weeks reported`);
-  }
-
   if (totalOptins > 0) {
     const cpl = totalSpend / totalOptins;
     set('sl-cpl', fmtMoney(cpl));
   } else {
     set('sl-cpl', '—');
+  }
+
+  // Top-of-funnel: GYLB Applications tile
+  const att = DASHBOARD_DATA.attribution || {};
+  if (typeof att.applicationsSinceQuiz === 'number') {
+    set('sl-apps', fmtNum(att.applicationsSinceQuiz));
+    set('sl-apps-sub', `Submitted since ${att.applicationsSpendStart || 'launch'}`);
+  } else {
+    set('sl-apps', '—');
+  }
+
+  // Revenue Attribution Scorecard
+  // Tile 1: Confirmed Campaign Revenue (floor)
+  if (typeof att.confirmedCampaignRevenue === 'number') {
+    set('sl-tile1', fmtMoney(att.confirmedCampaignRevenue));
+    set('sl-tile1-sub', `${att.confirmedCampaignBuyers || 0} net-new buyers from bundle`);
+  }
+
+  // Tile 2: Bundle List Buyers
+  if (typeof att.bundleListBuyersRevenue === 'number') {
+    set('sl-tile2', fmtMoney(att.bundleListBuyersRevenue));
+    set('sl-tile2-sub', `${att.bundleListBuyersCount || 0} buyers incl. alumni reactivations`);
+  }
+
+  // Tile 3: Program Revenue (ceiling)
+  if (typeof att.programRevenue === 'number') {
+    set('sl-tile3', fmtMoney(att.programRevenue));
+    set('sl-tile3-sub', 'All GYLB sales during campaign weeks');
+  } else if (typeof DASHBOARD_DATA.programRevenueLifetime === 'number') {
+    set('sl-tile3', fmtMoney(DASHBOARD_DATA.programRevenueLifetime));
+    set('sl-tile3-sub', 'All GYLB sales during campaign weeks');
+  }
+
+  // Tile 4: Cost per Application
+  if (typeof att.applicationsSinceQuiz === 'number' && att.applicationsSinceQuiz > 0
+      && typeof att.applicationsSpend === 'number') {
+    const cpa = att.applicationsSpend / att.applicationsSinceQuiz;
+    set('sl-tile4', fmtMoney(cpa));
+    set('sl-tile4-sub', `${att.applicationsSinceQuiz} apps / ${fmtMoney(att.applicationsSpend)} spend since ${att.applicationsSpendStart}`);
   }
 }
 
