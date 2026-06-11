@@ -474,7 +474,7 @@
     <div class="header-right">
       <div class="last-updated">
         <span class="status-dot"></span>
-        <span id="lastUpdated">Last updated: Jun 5, 2026 (week ending Jun 4)</span>
+        <span id="lastUpdated">Last updated: Jun 10, 2026 (opt-ins methodology corrected to dedup-by-email)</span>
       </div>
       <div class="logo-badge">Kaizen Sigma</div>
     </div>
@@ -803,7 +803,24 @@
 const DASHBOARD_DATA = {
   client: "Andrea Giles Coaching",
   accountId: "act_1062711985037270",
-  lastUpdated: "2026-06-05 (week ending Jun 4)",
+  lastUpdated: "2026-06-10 (opt-ins methodology corrected to dedup-by-email)",
+  // ============================================================
+  // Kajabi Opt-Ins Methodology (resolved 2026-06-10)
+  // ============================================================
+  // Every Friday Kajabi pull dedupes by email within the reporting window.
+  // Each week entry's `kajabiOptins` field is the count of UNIQUE email
+  // addresses that submitted the FB Ads Emotional Podcast Healing Bundle
+  // form (Form ID 2149436315) during Friday 00:00 PT through Thursday
+  // 23:59 PT (7 days). Raw row count is retained in `optInsRaw` for audit.
+  // `realCpl` = Podcast Bundle spend ÷ deduped opt-ins.
+  //
+  // History note: Apr 24 - Jun 4 weeks were originally entered with raw
+  // row count and corrected to deduped count on 2026-06-10 after Ana
+  // flagged a structural 2-9 opt-in gap every week between her view and
+  // ours. Weeks prior to Apr 24 retain CSV-export counts pending a
+  // separate audit; method varies. New entries from 2026-06-10 forward
+  // are dedup-by-email by default.
+  //
   // ============================================================
   // Revenue Attribution Scorecard (resolved 2026-05-07)
   // ============================================================
@@ -1104,7 +1121,7 @@ const DASHBOARD_DATA = {
       dateRange: { start: "2026-04-24", end: "2026-04-30" },
       account: { spend: 265.96, impressions: 19698, clicks: 2407, reach: 11312, videoViews: 3502 },
       campaigns: [
-        { name: "Podcast Bundle", type: "leadgen", spend: 194.53, leads: 463, cpl: 0.42, kajabiOptins: 192, realCpl: 1.01, linkClicks: 536, ctr: 19.56, lpv: 501, costLpv: 0.39, reach: 6239, impressions: 11663, frequency: 1.87, lpConvRate: 93.5 },
+        { name: "Podcast Bundle", type: "leadgen", spend: 194.53, leads: 463, cpl: 0.42, kajabiOptins: 179, realCpl: 1.09, linkClicks: 536, ctr: 19.56, lpv: 501, costLpv: 0.39, reach: 6239, impressions: 11663, frequency: 1.87, lpConvRate: 35.7, optInsMethod: "dedup-by-email-within-window", optInsRaw: 192 },
         { name: "Video Views (Cold)", type: "video", spend: 35.84, videoViews: 3502, costPerView: 0.0102, reach: 2907, impressions: 4044, frequency: 1.39 },
         { name: "Podcast Ep 150", type: "traffic", spend: 35.59, linkClicks: 202, cpc: 0.18, lpv: 180, costLpv: 0.20, ctr: 2.86, reach: 2166, impressions: 3991, frequency: 1.84 }
       ],
@@ -1127,7 +1144,7 @@ const DASHBOARD_DATA = {
       dateRange: { start: "2026-05-01", end: "2026-05-07" },
       account: { spend: 259.70, impressions: 21017, clicks: 2619, reach: 12564, videoViews: 2797 },
       campaigns: [
-        { name: "Podcast Bundle", type: "leadgen", spend: 192.34, leads: 491, cpl: 0.39, kajabiOptins: 203, realCpl: 0.95, linkClicks: 517, ctr: 20.24, lpv: 465, costLpv: 0.41, reach: 6448, impressions: 12190, frequency: 1.89, lpConvRate: 43.7 },
+        { name: "Podcast Bundle", type: "leadgen", spend: 192.34, leads: 491, cpl: 0.39, kajabiOptins: 189, realCpl: 1.02, linkClicks: 517, ctr: 20.24, lpv: 465, costLpv: 0.41, reach: 6448, impressions: 12190, frequency: 1.89, lpConvRate: 40.6, optInsMethod: "dedup-by-email-within-window", optInsRaw: 203 },
         { name: "Video Views (Cold)", type: "video", spend: 33.75, videoViews: 2797, costPerView: 0.0121, reach: 2945, impressions: 4275, frequency: 1.45 },
         { name: "Podcast Ep 150", type: "traffic", spend: 33.61, linkClicks: 207, cpc: 0.16, lpv: 165, costLpv: 0.20, ctr: 3.32, reach: 3171, impressions: 4552, frequency: 1.44 }
       ],
@@ -1149,7 +1166,7 @@ const DASHBOARD_DATA = {
       dateRange: { start: "2026-05-08", end: "2026-05-14" },
       account: { spend: 260.76, impressions: 27318, clicks: 2525, reach: 14657, videoViews: 2638 },
       campaigns: [
-        { name: "Podcast Bundle", type: "leadgen", spend: 187.30, leads: 549, cpl: 0.34, kajabiOptins: 230, realCpl: 0.81, linkClicks: 507, ctr: 18.60, lpv: 467, costLpv: 0.40, reach: 6817, impressions: 12644, frequency: 1.85, lpConvRate: 49.3 },
+        { name: "Podcast Bundle", type: "leadgen", spend: 187.30, leads: 549, cpl: 0.34, kajabiOptins: 213, realCpl: 0.88, linkClicks: 507, ctr: 18.60, lpv: 467, costLpv: 0.40, reach: 6817, impressions: 12644, frequency: 1.85, lpConvRate: 45.6, optInsMethod: "dedup-by-email-within-window", optInsRaw: 230 },
         { name: "Video Views (Cold)", type: "video", spend: 36.99, videoViews: 2638, costPerView: 0.0140, reach: 3272, impressions: 4452, frequency: 1.36 },
         { name: "Podcast Ep 150", type: "traffic", spend: 36.47, linkClicks: 254, cpc: 0.14, lpv: 221, costLpv: 0.17, ctr: 1.64, reach: 4568, impressions: 10222, frequency: 2.24 }
       ],
@@ -1170,7 +1187,7 @@ const DASHBOARD_DATA = {
       dateRange: { start: "2026-05-15", end: "2026-05-21" },
       account: { spend: 254.74, impressions: 21709, clicks: 2737, reach: 12775, videoViews: 3225 },
       campaigns: [
-        { name: "Podcast Bundle", type: "leadgen", spend: 187.12, leads: 439, cpl: 0.43, kajabiOptins: 195, realCpl: 0.96, linkClicks: 565, ctr: 19.77, lpv: 514, costLpv: 0.36, reach: 6870, impressions: 12931, frequency: 1.88, lpConvRate: 37.9 },
+        { name: "Podcast Bundle", type: "leadgen", spend: 187.12, leads: 439, cpl: 0.43, kajabiOptins: 188, realCpl: 1.00, linkClicks: 565, ctr: 19.77, lpv: 514, costLpv: 0.36, reach: 6870, impressions: 12931, frequency: 1.88, lpConvRate: 36.6, optInsMethod: "dedup-by-email-within-window", optInsRaw: 195 },
         { name: "Video Views (Cold)", type: "video", spend: 32.97, videoViews: 3225, costPerView: 0.0102, reach: 3337, impressions: 4577, frequency: 1.37 },
         { name: "Podcast Ep 150", type: "traffic", spend: 34.65, linkClicks: 202, cpc: 0.22, lpv: 163, costLpv: 0.21, ctr: 3.78, reach: 2568, impressions: 4201, frequency: 1.64 }
       ],
@@ -1191,7 +1208,7 @@ const DASHBOARD_DATA = {
       dateRange: { start: "2026-05-22", end: "2026-05-28" },
       account: { spend: 260.58, impressions: 21600, clicks: 2806, reach: 13257, videoViews: 4758 },
       campaigns: [
-        { name: "Podcast Bundle", type: "leadgen", spend: 178.53, leads: 396, cpl: 0.45, kajabiOptins: 193, realCpl: 0.93, linkClicks: 618, ctr: 22.61, lpv: 571, costLpv: 0.31, reach: 5459, impressions: 10991, frequency: 2.01, lpConvRate: 33.8 },
+        { name: "Podcast Bundle", type: "leadgen", spend: 178.53, leads: 396, cpl: 0.45, kajabiOptins: 184, realCpl: 0.97, linkClicks: 618, ctr: 22.61, lpv: 571, costLpv: 0.31, reach: 5459, impressions: 10991, frequency: 2.01, lpConvRate: 32.2, optInsMethod: "dedup-by-email-within-window", optInsRaw: 193 },
         { name: "Video Views (Cold)", type: "video", spend: 46.34, videoViews: 4758, costPerView: 0.0097, reach: 4568, impressions: 5744, frequency: 1.26 },
         { name: "Podcast Ep 150", type: "traffic", spend: 35.71, linkClicks: 233, cpc: 0.15, lpv: 137, costLpv: 0.26, ctr: 5.69, reach: 3230, impressions: 4865, frequency: 1.51 }
       ],
@@ -1213,7 +1230,7 @@ const DASHBOARD_DATA = {
       dateRange: { start: "2026-05-29", end: "2026-06-04" },
       account: { spend: 255.54, impressions: 40608, clicks: 2569, reach: 25490, videoViews: 5174 },
       campaigns: [
-        { name: "Podcast Bundle", type: "leadgen", spend: 172.57, leads: 375, cpl: 0.46, kajabiOptins: 183, realCpl: 0.94, linkClicks: 509, ctr: 20.75, lpv: 477, costLpv: 0.36, reach: 5791, impressions: 10796, frequency: 1.86, lpConvRate: 38.4 },
+        { name: "Podcast Bundle", type: "leadgen", spend: 172.57, leads: 375, cpl: 0.46, kajabiOptins: 174, realCpl: 0.99, linkClicks: 509, ctr: 20.75, lpv: 477, costLpv: 0.36, reach: 5791, impressions: 10796, frequency: 1.86, lpConvRate: 36.5, optInsMethod: "dedup-by-email-within-window", optInsRaw: 183 },
         { name: "Video Views (Cold)", type: "video", spend: 49.03, videoViews: 5174, costPerView: 0.0095, reach: 4641, impressions: 5928, frequency: 1.28 },
         { name: "Podcast Ep 150", type: "traffic", spend: 33.94, linkClicks: 183, cpc: 0.19, lpv: 96, costLpv: 0.35, ctr: 1.12, reach: 15058, impressions: 23884, frequency: 1.59 }
       ],
