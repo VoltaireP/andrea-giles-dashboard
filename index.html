@@ -628,15 +628,15 @@
         <div class="campaign-metrics">
           <div class="campaign-metric">
             <div class="label">Spend</div>
-            <div class="value" id="pb-spend">$172.57</div>
+            <div class="value" id="pb-spend">$176.71</div>
           </div>
           <div class="campaign-metric">
             <div class="label">Kajabi Opt-Ins</div>
-            <div class="value" id="pb-kajabi">183</div>
+            <div class="value" id="pb-kajabi">201</div>
           </div>
           <div class="campaign-metric">
             <div class="label">Real CPL</div>
-            <div class="value" id="pb-real-cpl">$0.94</div>
+            <div class="value" id="pb-real-cpl">$0.88</div>
           </div>
           <div class="campaign-metric">
             <div class="label">Link Clicks</div>
@@ -1245,6 +1245,28 @@ const DASHBOARD_DATA = {
         { rank: 8, name: "[1:47]- You don't heal because time passes", campaign: "Video Views", spend: 6.93, results: 1011, costPer: 0.0069, resultType: "views" },
         { rank: 9, name: "[0:27]- Survival Vs. Examine Strength", campaign: "Video Views", spend: 6.41, results: 1167, costPer: 0.0055, resultType: "views" }
       ]
+    },
+    {
+      label: "Jun 5 - 11",
+      dateRange: { start: "2026-06-05", end: "2026-06-11" },
+      account: { spend: 260.44, impressions: 56761, clicks: 2620, reach: 31214, videoViews: 8405 },
+      campaigns: [
+        { name: "Podcast Bundle", type: "leadgen", spend: 176.71, leads: 428, cpl: 0.41, kajabiOptins: 201, realCpl: 0.88, linkClicks: 511, ctr: 19.38, lpv: 480, costLpv: 0.37, reach: 7028, impressions: 12401, frequency: 1.76, lpConvRate: 41.9, optInsMethod: "dedup-by-email-within-window", optInsRaw: 215 },
+        { name: "Video Views (Cold)", type: "video", spend: 48.80, videoViews: 8405, costPerView: 0.0058, reach: 6136, impressions: 8963, frequency: 1.46 },
+        { name: "Podcast Ep 150", type: "traffic", spend: 34.93, linkClicks: 240, cpc: 0.15, lpv: 192, costLpv: 0.18, ctr: 0.52, reach: 18050, impressions: 35397, frequency: 1.96 }
+      ],
+      topAds: [
+        { rank: 1, name: "Control Ad 1- Their Guilt", campaign: "Podcast Bundle", spend: 79.29, results: 239, costPer: 0.33, resultType: "leads" },
+        { rank: 2, name: "Variable B- GIF Testimonial Social Proof", campaign: "Podcast Bundle", spend: 50.80, results: 42, costPer: 1.21, resultType: "leads" },
+        { rank: 3, name: "Ad 3- Transformation- Peace is Possible", campaign: "Podcast Bundle", spend: 32.95, results: 127, costPer: 0.26, resultType: "leads" },
+        { rank: 4, name: "[0:39]- Life Changing Transformation", campaign: "Video Views", spend: 25.63, results: 4005, costPer: 0.0064, resultType: "views" },
+        { rank: 5, name: "[0:27]- Survival Vs. Examine Strength", campaign: "Video Views", spend: 7.38, results: 1388, costPer: 0.0053, resultType: "views" },
+        { rank: 6, name: "Variable A- Testimonial Social Proof", campaign: "Podcast Bundle", spend: 7.18, results: 8, costPer: 0.90, resultType: "leads" },
+        { rank: 7, name: "[1:47]- You don't heal because time passes", campaign: "Video Views", spend: 7.11, results: 1244, costPer: 0.0057, resultType: "views" },
+        { rank: 8, name: "[0:23]- Here's the thing about shame", campaign: "Video Views", spend: 6.53, results: 1296, costPer: 0.0050, resultType: "views" },
+        { rank: 9, name: "Variable C- Winner SMM Posts", campaign: "Podcast Bundle", spend: 6.22, results: 12, costPer: 0.52, resultType: "leads" },
+        { rank: 10, name: "[1:47]- You Don't Heal (NEW 6/9)", campaign: "Video Views", spend: 2.15, results: 472, costPer: 0.0046, resultType: "views" }
+      ]
     }
   ]
 };
@@ -1252,7 +1274,7 @@ const DASHBOARD_DATA = {
 // ============================================================
 // DASHBOARD ENGINE
 // ============================================================
-let currentWeek = 18;
+let currentWeek = 19;
 let charts = {};
 
 function init() {
