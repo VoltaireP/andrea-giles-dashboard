@@ -474,7 +474,7 @@
     <div class="header-right">
       <div class="last-updated">
         <span class="status-dot"></span>
-        <span id="lastUpdated">Last updated: Jun 12, 2026 (week ending Jun 11)</span>
+        <span id="lastUpdated">Last updated: Jun 19, 2026 (week ending Jun 18)</span>
       </div>
       <div class="logo-badge">Kaizen Sigma</div>
     </div>
@@ -803,7 +803,7 @@
 const DASHBOARD_DATA = {
   client: "Andrea Giles Coaching",
   accountId: "act_1062711985037270",
-  lastUpdated: "2026-06-12 (week ending Jun 11)",
+  lastUpdated: "2026-06-19 (week ending Jun 18)",
   // ============================================================
   // Kajabi Opt-Ins Methodology (resolved 2026-06-10)
   // ============================================================
@@ -1267,6 +1267,28 @@ const DASHBOARD_DATA = {
         { rank: 9, name: "Variable C- Winner SMM Posts", campaign: "Podcast Bundle", spend: 6.22, results: 12, costPer: 0.52, resultType: "leads" },
         { rank: 10, name: "[1:47]- You Don't Heal (NEW 6/9)", campaign: "Video Views", spend: 2.15, results: 472, costPer: 0.0046, resultType: "views" }
       ]
+    },
+    {
+      label: "Jun 12 - 18",
+      dateRange: { start: "2026-06-12", end: "2026-06-18" },
+      account: { spend: 254.75, impressions: 60964, clicks: 2422, reach: 35735, videoViews: 9103 },
+      campaigns: [
+        { name: "Podcast Bundle", type: "leadgen", spend: 171.45, leads: 368, cpl: 0.47, kajabiOptins: 161, realCpl: 1.06, linkClicks: 466, ctr: 19.36, lpv: 424, costLpv: 0.40, reach: 5765, impressions: 11485, frequency: 1.99, lpConvRate: 38.0, optInsMethod: "dedup-by-email-within-window", optInsRaw: 173 },
+        { name: "Video Views (Cold)", type: "video", spend: 48.84, videoViews: 9103, costPerView: 0.0054, reach: 6837, impressions: 9676, frequency: 1.42 },
+        { name: "Podcast Ep 150", type: "traffic", spend: 34.46, linkClicks: 200, cpc: 0.17, lpv: 146, costLpv: 0.24, ctr: 0.45, reach: 23133, impressions: 39803, frequency: 1.72 }
+      ],
+      topAds: [
+        { rank: 1, name: "Ad 3- Transformation- Peace is Possible", campaign: "Podcast Bundle", spend: 60.35, results: 165, costPer: 0.37, resultType: "leads" },
+        { rank: 2, name: "Control Ad 1- Their Guilt", campaign: "Podcast Bundle", spend: 49.76, results: 158, costPer: 0.31, resultType: "leads" },
+        { rank: 3, name: "Variable B- GIF Testimonial Social Proof", campaign: "Podcast Bundle", spend: 47.82, results: 36, costPer: 1.33, resultType: "leads" },
+        { rank: 4, name: "[0:39]- Life Changing Transformation", campaign: "Video Views", spend: 21.35, results: 3730, costPer: 0.0057, resultType: "views" },
+        { rank: 5, name: "Variable A- Testimonial Social Proof", campaign: "Podcast Bundle", spend: 7.03, results: 6, costPer: 1.17, resultType: "leads" },
+        { rank: 6, name: "[1:47]- You Don't Heal (NEW 6/9)", campaign: "Video Views", spend: 6.96, results: 1553, costPer: 0.0045, resultType: "views" },
+        { rank: 7, name: "[1:47]- You don't heal because time passes", campaign: "Video Views", spend: 6.86, results: 1468, costPer: 0.0047, resultType: "views" },
+        { rank: 8, name: "[0:23]- Here's the thing about shame", campaign: "Video Views", spend: 6.83, results: 1181, costPer: 0.0058, resultType: "views" },
+        { rank: 9, name: "[0:27]- Survival Vs. Examine Strength", campaign: "Video Views", spend: 6.84, results: 1171, costPer: 0.0058, resultType: "views" },
+        { rank: 10, name: "Variable C- Winner SMM Posts", campaign: "Podcast Bundle", spend: 6.45, results: 3, costPer: 2.15, resultType: "leads" }
+      ]
     }
   ]
 };
@@ -1274,7 +1296,7 @@ const DASHBOARD_DATA = {
 // ============================================================
 // DASHBOARD ENGINE
 // ============================================================
-let currentWeek = 19;
+let currentWeek = 20;
 let charts = {};
 
 function init() {
