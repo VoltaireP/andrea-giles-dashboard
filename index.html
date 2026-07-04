@@ -474,7 +474,7 @@
     <div class="header-right">
       <div class="last-updated">
         <span class="status-dot"></span>
-        <span id="lastUpdated">Last updated: Jun 27, 2026 (week ending Jun 25)</span>
+        <span id="lastUpdated">Last updated: Jul 3, 2026 (week ending Jul 2)</span>
       </div>
       <div class="logo-badge">Kaizen Sigma</div>
     </div>
@@ -803,7 +803,7 @@
 const DASHBOARD_DATA = {
   client: "Andrea Giles Coaching",
   accountId: "act_1062711985037270",
-  lastUpdated: "2026-06-27 (week ending Jun 25)",
+  lastUpdated: "2026-07-03 (week ending Jul 2)",
   // ============================================================
   // Kajabi Opt-Ins Methodology (resolved 2026-06-10)
   // ============================================================
@@ -1306,6 +1306,22 @@ const DASHBOARD_DATA = {
         { rank: 4, name: "Variable A- Testimonial Social Proof", campaign: "Podcast Bundle", spend: 8.76, results: 2, costPer: 4.38, resultType: "leads" },
         { rank: 5, name: "Variable C- Winner SMM Posts", campaign: "Podcast Bundle", spend: 6.44, results: 11, costPer: 0.59, resultType: "leads" }
       ]
+    },
+    {
+      label: "Jun 26 - Jul 2",
+      dateRange: { start: "2026-06-26", end: "2026-07-02" },
+      account: { spend: 258.57, impressions: 37276, clicks: 2501, reach: 22041, videoViews: 6964 },
+      campaigns: [
+        { name: "Podcast Bundle", type: "leadgen", spend: 174.38, leads: 335, cpl: 0.52, kajabiOptins: 151, realCpl: 1.15, linkClicks: 462, ctr: 20.36, lpv: 443, costLpv: 0.39, reach: 5063, impressions: 10571, frequency: 2.09, lpConvRate: 34.1, optInsMethod: "dedup-by-email-within-window", optInsRaw: 163 },
+        { name: "Video Views (Cold)", type: "video", spend: 48.91, videoViews: 6964, costPerView: 0.0070, reach: 6598, impressions: 7986, frequency: 1.21 },
+        { name: "Podcast Ep 150", type: "traffic", spend: 35.28, linkClicks: 194, cpc: 0.18, lpv: 147, costLpv: 0.24, ctr: 1.13, reach: 10380, impressions: 18719, frequency: 1.80 }
+      ],
+      topAds: [
+        { rank: 1, name: "Ad 3- Transformation- Peace is Possible", campaign: "Podcast Bundle", spend: 57.64, results: 148, costPer: 0.39, resultType: "leads" },
+        { rank: 2, name: "Control Ad 1- Their Guilt", campaign: "Podcast Bundle", spend: 49.22, results: 141, costPer: 0.35, resultType: "leads" },
+        { rank: 3, name: "Variable B- GIF Testimonial Social Proof", campaign: "Podcast Bundle", spend: 41.80, results: 19, costPer: 2.20, resultType: "leads" },
+        { rank: 4, name: "Variable C- Winner SMM Posts", campaign: "Podcast Bundle", spend: 25.63, results: 27, costPer: 0.95, resultType: "leads" }
+      ]
     }
   ]
 };
@@ -1313,7 +1329,7 @@ const DASHBOARD_DATA = {
 // ============================================================
 // DASHBOARD ENGINE
 // ============================================================
-let currentWeek = 21;
+let currentWeek = 22;
 let charts = {};
 
 function init() {
