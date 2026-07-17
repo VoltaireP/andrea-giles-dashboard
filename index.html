@@ -474,7 +474,7 @@
     <div class="header-right">
       <div class="last-updated">
         <span class="status-dot"></span>
-        <span id="lastUpdated">Last updated: Jul 11, 2026 (week ending Jul 9)</span>
+        <span id="lastUpdated">Last updated: Jul 17, 2026 (week ending Jul 16)</span>
       </div>
       <div class="logo-badge">Kaizen Sigma</div>
     </div>
@@ -533,9 +533,9 @@
         <div class="sub" id="sl-tile3-sub">Ceiling: all GYLB sales during campaign weeks</div>
       </div>
       <div class="since-launch-stat">
-        <div class="label">Cost per Application</div>
+        <div class="label">Course Sales (Summer)</div>
         <div class="value" id="sl-tile4">&mdash;</div>
-        <div class="sub" id="sl-tile4-sub">Mid-funnel: cleanest attribution</div>
+        <div class="sub" id="sl-tile4-sub">Downstream metric since the 7/8 email repoint</div>
       </div>
     </div>
   </div>
@@ -803,7 +803,7 @@
 const DASHBOARD_DATA = {
   client: "Andrea Giles Coaching",
   accountId: "act_1062711985037270",
-  lastUpdated: "2026-07-11 (week ending Jul 9)",
+  lastUpdated: "2026-07-17 (week ending Jul 16)",
   // ============================================================
   // Kajabi Opt-Ins Methodology (resolved 2026-06-10)
   // ============================================================
@@ -877,9 +877,19 @@ const DASHBOARD_DATA = {
     bundleListBuyersRevenue: 15685,
     bundleListBuyersCount: 7,
     programRevenue: 24179,
-    applicationsSinceQuiz: 11,
+    // Summer 2026 pivot (2026-07-17 update): GYLB group PAUSED for summer as of
+    // 2026-07-01 (reopens fall), so applications are frozen as a metric. The
+    // downstream metric is now $297 course sales (offer QFkZ2Cp2, sales-report
+    // line "Get Your Life Back After Infidelity (Course Only 2026)"). Email 5 in
+    // all six nurture cycles repointed to the course 2026-07-08 (Shannon built,
+    // KS authored) with per-cycle UTMs (utm_campaign=gylb-course). Course sales
+    // count/revenue tracked here and per-week via courseSales/courseRevenue.
+    applicationsSinceQuiz: 23,
+    applicationsNote: "Paused for summer as of 7/1 (group reopens fall)",
     applicationsSpend: 2935,
-    applicationsSpendStart: "2026-03-16"
+    applicationsSpendStart: "2026-03-16",
+    courseSalesCount: 2,
+    courseSalesRevenue: 594
   },
   weeks: [
     {
@@ -1338,6 +1348,25 @@ const DASHBOARD_DATA = {
         { rank: 3, name: "Ad 3- Transformation- Peace is Possible", campaign: "Podcast Bundle", spend: 38.63, results: 102, costPer: 0.38, resultType: "leads" },
         { rank: 4, name: "Variable B- GIF Testimonial Social Proof", campaign: "Podcast Bundle", spend: 0.53, results: 0, costPer: 0, resultType: "leads" }
       ]
+    },
+    {
+      label: "Jul 10 - 16",
+      dateRange: { start: "2026-07-10", end: "2026-07-16" },
+      account: { spend: 258.13, impressions: 48370, clicks: 2867, reach: 26029, videoViews: 7103 },
+      courseSales: 0,
+      courseRevenue: 0,
+      campaigns: [
+        { name: "Podcast Bundle", type: "leadgen", spend: 173.85, leads: 426, cpl: 0.41, kajabiOptins: 191, realCpl: 0.91, linkClicks: 650, ctr: 22.99, lpv: 615, costLpv: 0.28, reach: 5180, impressions: 10943, frequency: 2.11, lpConvRate: 31.1, optInsMethod: "dedup-by-email-within-window", optInsRaw: 206 },
+        { name: "Video Views (Cold)", type: "video", spend: 48.76, videoViews: 7103, costPerView: 0.0069, reach: 6876, impressions: 8082, frequency: 1.18 },
+        { name: "Podcast Ep 150", type: "traffic", spend: 35.52, linkClicks: 223, cpc: 0.16, lpv: 179, costLpv: 0.20, ctr: 0.84, reach: 13973, impressions: 29345, frequency: 2.10 }
+      ],
+      topAds: [
+        { rank: 1, name: "Variable C- Winner SMM Posts", campaign: "Podcast Bundle", spend: 69.99, results: 74, costPer: 0.95, resultType: "leads" },
+        { rank: 2, name: "Control Ad 1- Their Guilt", campaign: "Podcast Bundle", spend: 65.15, results: 200, costPer: 0.33, resultType: "leads" },
+        { rank: 3, name: "Ad 3- Transformation- Peace is Possible", campaign: "Podcast Bundle", spend: 37.92, results: 152, costPer: 0.25, resultType: "leads" },
+        { rank: 4, name: "Ad 11- Peace/Transformation Iteration (NEW 7/9)", campaign: "Podcast Bundle", spend: 0.00, results: 0, costPer: 0, resultType: "leads" },
+        { rank: 5, name: "Variable B- GIF Testimonial Social Proof", campaign: "Podcast Bundle", spend: 0.77, results: 0, costPer: 0, resultType: "leads" }
+      ]
     }
   ]
 };
@@ -1345,7 +1374,7 @@ const DASHBOARD_DATA = {
 // ============================================================
 // DASHBOARD ENGINE
 // ============================================================
-let currentWeek = 23;
+let currentWeek = 24;
 let charts = {};
 
 function init() {
@@ -1464,7 +1493,7 @@ function renderSinceLaunch() {
   const att = DASHBOARD_DATA.attribution || {};
   if (typeof att.applicationsSinceQuiz === 'number') {
     set('sl-apps', fmtNum(att.applicationsSinceQuiz));
-    set('sl-apps-sub', `Submitted since ${att.applicationsSpendStart || 'launch'}`);
+    set('sl-apps-sub', att.applicationsNote || `Submitted since ${att.applicationsSpendStart || 'launch'}`);
   } else {
     set('sl-apps', '—');
   }
@@ -1491,12 +1520,12 @@ function renderSinceLaunch() {
     set('sl-tile3-sub', 'All GYLB sales during campaign weeks');
   }
 
-  // Tile 4: Cost per Application
-  if (typeof att.applicationsSinceQuiz === 'number' && att.applicationsSinceQuiz > 0
-      && typeof att.applicationsSpend === 'number') {
-    const cpa = att.applicationsSpend / att.applicationsSinceQuiz;
-    set('sl-tile4', fmtMoney(cpa));
-    set('sl-tile4-sub', `${att.applicationsSinceQuiz} apps / ${fmtMoney(att.applicationsSpend)} spend since ${att.applicationsSpendStart}`);
+  // Tile 4: Course Sales (Summer 2026 pivot — replaced Cost per Application on
+  // 2026-07-17 after the GYLB group paused for summer and Email 5 across all six
+  // nurture cycles was repointed to the $297 self-study course on 2026-07-08)
+  if (typeof att.courseSalesRevenue === 'number') {
+    set('sl-tile4', fmtMoney(att.courseSalesRevenue));
+    set('sl-tile4-sub', `${att.courseSalesCount || 0} course sales at $297 · list-driven, ad-credit only if traced`);
   }
 }
 
