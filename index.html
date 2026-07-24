@@ -474,7 +474,7 @@
     <div class="header-right">
       <div class="last-updated">
         <span class="status-dot"></span>
-        <span id="lastUpdated">Last updated: Jul 17, 2026 (week ending Jul 16)</span>
+        <span id="lastUpdated">Last updated: Jul 24, 2026 (week ending Jul 23)</span>
       </div>
       <div class="logo-badge">Kaizen Sigma</div>
     </div>
@@ -803,7 +803,7 @@
 const DASHBOARD_DATA = {
   client: "Andrea Giles Coaching",
   accountId: "act_1062711985037270",
-  lastUpdated: "2026-07-17 (week ending Jul 16)",
+  lastUpdated: "2026-07-24 (week ending Jul 23)",
   // ============================================================
   // Kajabi Opt-Ins Methodology (resolved 2026-06-10)
   // ============================================================
@@ -1367,6 +1367,27 @@ const DASHBOARD_DATA = {
         { rank: 4, name: "Ad 11- Peace/Transformation Iteration (NEW 7/9)", campaign: "Podcast Bundle", spend: 0.00, results: 0, costPer: 0, resultType: "leads" },
         { rank: 5, name: "Variable B- GIF Testimonial Social Proof", campaign: "Podcast Bundle", spend: 0.77, results: 0, costPer: 0, resultType: "leads" }
       ]
+    },
+    {
+      // SOURCE NOTE: captured from Ads Manager (campaign level) on 2026-07-24
+      // because the Pipeboard Meta connector was returning a date-parameter
+      // error across all 20 client accounts. Spend/impressions/reach/frequency
+      // are verified; click, link-click, landing-page-view and CTR detail were
+      // not in the captured column set and are recorded null rather than
+      // estimated. `leads` here is Meta's custom-conversion "Results" metric
+      // (204 @ $0.85), which now tracks within ~4% of the deduped Kajabi count
+      // (197) — notably tighter than the old raw pixel-lead event.
+      label: "Jul 17 - 23",
+      dateRange: { start: "2026-07-17", end: "2026-07-23" },
+      account: { spend: 257.20, impressions: 47275, clicks: null, reach: 27673, videoViews: 5207 },
+      courseSales: 0,
+      courseRevenue: 0,
+      campaigns: [
+        { name: "Podcast Bundle", type: "leadgen", spend: 174.18, leads: 204, cpl: 0.85, kajabiOptins: 197, realCpl: 0.88, linkClicks: null, ctr: null, lpv: null, costLpv: null, reach: 5996, impressions: 12275, frequency: 2.05, lpConvRate: null, optInsMethod: "dedup-by-email-within-window", optInsRaw: 210, leadsMetric: "meta-custom-conversion-results" },
+        { name: "Video Views (Cold)", type: "video", spend: 48.66, videoViews: 5207, costPerView: 0.01, reach: 6773, impressions: 8407, frequency: 1.24 },
+        { name: "Podcast Ep 150", type: "traffic", spend: 34.36, linkClicks: 230, cpc: 0.15, lpv: null, costLpv: null, ctr: null, reach: 14904, impressions: 26593, frequency: 1.78 }
+      ],
+      topAds: []
     }
   ]
 };
@@ -1374,7 +1395,7 @@ const DASHBOARD_DATA = {
 // ============================================================
 // DASHBOARD ENGINE
 // ============================================================
-let currentWeek = 24;
+let currentWeek = 25;
 let charts = {};
 
 function init() {
@@ -1425,8 +1446,11 @@ function fmtPct(val) {
   return sign + val.toFixed(1) + '% vs last week';
 }
 
-function fmtMoney(val) { return '$' + val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
-function fmtNum(val) { return val.toLocaleString('en-US'); }
+// Null-safe formatters: a week captured from a partial source (e.g. Ads Manager
+// screenshot when the Pipeboard API is down) may legitimately lack some detail
+// fields. Render those as an em dash rather than throwing and blanking the page.
+function fmtMoney(val) { if (val === null || val === undefined || isNaN(val)) return '—'; return '$' + val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+function fmtNum(val) { if (val === null || val === undefined || isNaN(val)) return '—'; return val.toLocaleString('en-US'); }
 
 function renderDashboard() {
   const week = getWeek(currentWeek);
