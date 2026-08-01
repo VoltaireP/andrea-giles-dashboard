@@ -474,7 +474,7 @@
     <div class="header-right">
       <div class="last-updated">
         <span class="status-dot"></span>
-        <span id="lastUpdated">Last updated: Jul 24, 2026 (week ending Jul 23)</span>
+        <span id="lastUpdated">Last updated: Aug 1, 2026 (week ending Jul 30)</span>
       </div>
       <div class="logo-badge">Kaizen Sigma</div>
     </div>
@@ -803,7 +803,7 @@
 const DASHBOARD_DATA = {
   client: "Andrea Giles Coaching",
   accountId: "act_1062711985037270",
-  lastUpdated: "2026-07-24 (week ending Jul 23)",
+  lastUpdated: "2026-08-01 (week ending Jul 30)",
   // ============================================================
   // Kajabi Opt-Ins Methodology (resolved 2026-06-10)
   // ============================================================
@@ -1388,6 +1388,28 @@ const DASHBOARD_DATA = {
         { name: "Podcast Ep 150", type: "traffic", spend: 34.36, linkClicks: 230, cpc: 0.15, lpv: null, costLpv: null, ctr: null, reach: 14904, impressions: 26593, frequency: 1.78 }
       ],
       topAds: []
+    },
+    {
+      // Pipeboard's time_range bug (see Jul 17-23 note) was FIXED as of this run —
+      // the API returned the correct date_start/date_stop for the requested window,
+      // so this week is a normal full API pull, not a screenshot capture.
+      label: "Jul 24 - 30",
+      dateRange: { start: "2026-07-24", end: "2026-07-30" },
+      account: { spend: 249.42, impressions: 34356, clicks: 2818, reach: 21195, videoViews: 6307 },
+      courseSales: 0,
+      courseRevenue: 0,
+      campaigns: [
+        { name: "Podcast Bundle", type: "leadgen", spend: 168.03, leads: 445, cpl: 0.38, kajabiOptins: 205, realCpl: 0.82, linkClicks: 551, ctr: 22.18, lpv: 551, costLpv: 0.30, reach: 5395, impressions: 11254, frequency: 2.09, lpConvRate: 37.2, optInsMethod: "dedup-by-email-within-window", optInsRaw: 221 },
+        { name: "Video Views (Cold)", type: "video", spend: 47.05, videoViews: 6307, costPerView: 0.0075, reach: 5893, impressions: 7165, frequency: 1.22 },
+        { name: "Podcast Ep 150", type: "traffic", spend: 34.34, linkClicks: 231, cpc: 0.15, lpv: 195, costLpv: 0.18, ctr: 1.10, reach: 9907, impressions: 15937, frequency: 1.61 }
+      ],
+      topAds: [
+        { rank: 1, name: "Ad 3- Transformation- Peace is Possible", campaign: "Podcast Bundle", spend: 72.60, results: 197, costPer: 0.37, resultType: "leads" },
+        { rank: 2, name: "Control Ad 1- Their Guilt", campaign: "Podcast Bundle", spend: 59.85, results: 183, costPer: 0.33, resultType: "leads" },
+        { rank: 3, name: "Ad 11- Peace/Transformation Iteration (relaunched 7/20)", campaign: "Podcast Bundle", spend: 34.59, results: 62, costPer: 0.56, resultType: "leads" },
+        { rank: 4, name: "Variable C- Winner SMM Posts", campaign: "Podcast Bundle", spend: 0.70, results: 3, costPer: 0.23, resultType: "leads" },
+        { rank: 5, name: "Control Ad 4- You Won't Feel Like This Forever (NEW)", campaign: "Podcast Bundle", spend: 0.29, results: 0, costPer: 0, resultType: "leads" }
+      ]
     }
   ]
 };
@@ -1395,7 +1417,7 @@ const DASHBOARD_DATA = {
 // ============================================================
 // DASHBOARD ENGINE
 // ============================================================
-let currentWeek = 25;
+let currentWeek = 26;
 let charts = {};
 
 function init() {
