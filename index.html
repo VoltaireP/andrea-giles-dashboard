@@ -474,7 +474,7 @@
     <div class="header-right">
       <div class="last-updated">
         <span class="status-dot"></span>
-        <span id="lastUpdated">Last updated: Aug 1, 2026 (week ending Jul 30)</span>
+        <span id="lastUpdated">Last updated: Aug 7, 2026 (week ending Aug 6)</span>
       </div>
       <div class="logo-badge">Kaizen Sigma</div>
     </div>
@@ -628,15 +628,15 @@
         <div class="campaign-metrics">
           <div class="campaign-metric">
             <div class="label">Spend</div>
-            <div class="value" id="pb-spend">$176.71</div>
+            <div class="value" id="pb-spend">$179.93</div>
           </div>
           <div class="campaign-metric">
             <div class="label">Kajabi Opt-Ins</div>
-            <div class="value" id="pb-kajabi">201</div>
+            <div class="value" id="pb-kajabi">170</div>
           </div>
           <div class="campaign-metric">
             <div class="label">Real CPL</div>
-            <div class="value" id="pb-real-cpl">$0.88</div>
+            <div class="value" id="pb-real-cpl">$1.06</div>
           </div>
           <div class="campaign-metric">
             <div class="label">Link Clicks</div>
@@ -803,7 +803,7 @@
 const DASHBOARD_DATA = {
   client: "Andrea Giles Coaching",
   accountId: "act_1062711985037270",
-  lastUpdated: "2026-08-01 (week ending Jul 30)",
+  lastUpdated: "2026-08-07 (week ending Aug 6)",
   // ============================================================
   // Kajabi Opt-Ins Methodology (resolved 2026-06-10)
   // ============================================================
@@ -1410,6 +1410,35 @@ const DASHBOARD_DATA = {
         { rank: 4, name: "Variable C- Winner SMM Posts", campaign: "Podcast Bundle", spend: 0.70, results: 3, costPer: 0.23, resultType: "leads" },
         { rank: 5, name: "Control Ad 4- You Won't Feel Like This Forever (NEW)", campaign: "Podcast Bundle", spend: 0.29, results: 0, costPer: 0, resultType: "leads" }
       ]
+    },
+    {
+      // Jul 31 - Aug 6: first week-over-week decline in six weeks.
+      // Opt-ins 205 -> 170, Real CPL $0.82 -> $1.06 on 7% MORE spend.
+      // Driver is auction cost, not creative: Podcast Bundle CPM rose 18%
+      // ($14.93 -> $17.66) while CTR held flat (22.18% -> 22.01%), so the same
+      // creative bought 9% fewer impressions and 9% fewer landing page views.
+      // Course sales still zero — now 30 days with zero since the Email 5
+      // repoint went live 7/8. Verified directly in the Kajabi sales report:
+      // the "Course Only 2026" line is absent from Jul 8-Aug 6 entirely, and
+      // that window's "Other" bucket totals $144 ($97 + $47), leaving no room
+      // for a $297 line. Both lifetime course sales predate 7/8.
+      label: "Jul 31 - Aug 6",
+      dateRange: { start: "2026-07-31", end: "2026-08-06" },
+      account: { spend: 266.16, impressions: 28671, clicks: 2532, reach: 17033, videoViews: 6714 },
+      courseSales: 0,
+      courseRevenue: 0,
+      campaigns: [
+        { name: "Podcast Bundle", type: "leadgen", spend: 179.93, leads: 389, cpl: 0.46, kajabiOptins: 170, realCpl: 1.06, linkClicks: 532, ctr: 22.01, lpv: 502, costLpv: 0.36, reach: 5001, impressions: 10189, frequency: 2.04, lpConvRate: 33.9, optInsMethod: "dedup-by-email-within-window", optInsRaw: 183 },
+        { name: "Video Views (Cold)", type: "video", spend: 51.81, videoViews: 6714, costPerView: 0.0077, reach: 5697, impressions: 7363, frequency: 1.29 },
+        { name: "Podcast Ep 150", type: "traffic", spend: 34.42, linkClicks: 168, cpc: 0.20, lpv: 122, costLpv: 0.28, ctr: 1.70, reach: 6335, impressions: 11119, frequency: 1.76 }
+      ],
+      topAds: [
+        { rank: 1, name: "Ad 3- Transformation- Peace is Possible", campaign: "Podcast Bundle", spend: 69.22, results: 131, costPer: 0.53, resultType: "leads" },
+        { rank: 2, name: "Control Ad 1- Their Guilt", campaign: "Podcast Bundle", spend: 67.40, results: 181, costPer: 0.37, resultType: "leads" },
+        { rank: 3, name: "Ad 11- Peace/Transformation Iteration", campaign: "Podcast Bundle", spend: 37.04, results: 75, costPer: 0.49, resultType: "leads" },
+        { rank: 4, name: "Control Ad 4- You Won't Feel Like This Forever", campaign: "Podcast Bundle", spend: 5.61, results: 2, costPer: 2.81, resultType: "leads" },
+        { rank: 5, name: "Variable C- Winner SMM Posts", campaign: "Podcast Bundle", spend: 0.66, results: 0, costPer: 0, resultType: "leads" }
+      ]
     }
   ]
 };
@@ -1417,7 +1446,7 @@ const DASHBOARD_DATA = {
 // ============================================================
 // DASHBOARD ENGINE
 // ============================================================
-let currentWeek = 26;
+let currentWeek = 27;
 let charts = {};
 
 function init() {
